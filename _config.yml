@@ -96,5 +96,5 @@ theme: landscape
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: 'git'
-  repo: https://github.com/Askr-ssy/Askr-ssy.github.io.git
-  branch: master
+  repository: 'git@github.com:Askr-ssy/Askr-ssy.github.io.git'
+  branch: 'master'
