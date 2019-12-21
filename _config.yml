@@ -98,3 +98,6 @@ deploy:
   type: 'git'
   repository: 'git@github.com:Askr-ssy/Askr-ssy.github.io.git'
   branch: 'master'
+  name: 'Askr-ssy'
+  email: 'm3933030@gmail.com'
+
