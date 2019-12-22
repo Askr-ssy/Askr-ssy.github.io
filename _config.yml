@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
+title: askr's blog
+subtitle: 'book box'
 description: ''
 keywords:
-author: John Doe
+author: Askr
 language: en
-timezone: ''
+timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://Askr-ssy.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -43,11 +43,14 @@ render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
+
 highlight:
   enable: true
   line_number: true
-  auto_detect: false
+  auto_detect: true
   tab_replace: ''
+mathjax: true
+
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
