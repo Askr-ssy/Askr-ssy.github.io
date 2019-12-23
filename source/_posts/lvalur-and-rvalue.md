@@ -5,6 +5,7 @@ tags:
 - cpp
 - lvalue
 - rvalue
+description: cpp中的值类型 
 ---
 # cpp 的 value_category
 
