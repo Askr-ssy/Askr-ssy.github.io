@@ -1,11 +1,12 @@
 ---
 title: secure_shell 简述之非对称加密
-date: 2018-2-15 19:23:36
+date: 2019-2-15 19:23:36
 tags:
 - ssh
 - rsa
 - 非对称加密
 description: ssh之非对称加密
+mathjax: true
 ---
 ## SSH简述
 &ensp;&ensp;&ensp;&ensp;SSH 全称为Secure Shell , 是一种加密的 __网络传输协议__ ,即理论上任何网络服务都可以用SSH来安全传输，不过主要用于远程登陆系统。SSH的出现主要用于取代以往不安全的Telnet 和非安全shell的替代品，Telnet 与 Berkeley Login，rsh，rexec等协议采用明文传输，容易遭受到攻击，所以应此产生了SSH这种能在非安全网络环境下(容易受到攻击，如互联网)信息的加密完整可靠。
