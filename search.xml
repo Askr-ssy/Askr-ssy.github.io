@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>secure_shell 简述之非对称加密</title>
+      <link href="/2019/02/15/secure-shell-1/"/>
+      <url>/2019/02/15/secure-shell-1/</url>
+      
+        <content type="html"><![CDATA[<h2 id="SSH简述"><a href="#SSH简述" class="headerlink" title="SSH简述"></a>SSH简述</h2><p>&ensp;&ensp;&ensp;&ensp;SSH 全称为Secure Shell , 是一种加密的 <strong>网络传输协议</strong> ,即理论上任何网络服务都可以用SSH来安全传输，不过主要用于远程登陆系统。SSH的出现主要用于取代以往不安全的Telnet 和非安全shell的替代品，Telnet 与 Berkeley Login，rsh，rexec等协议采用明文传输，容易遭受到攻击，所以应此产生了SSH这种能在非安全网络环境下(容易受到攻击，如互联网)信息的加密完整可靠。</p><h2 id="SSH原理"><a href="#SSH原理" class="headerlink" title="SSH原理"></a>SSH原理</h2><p>&ensp;&ensp;&ensp;&ensp;谈到SSH就不得不提到SSH的通信原理 <strong>公开密钥加密(Public-Key Cryptography)</strong> 国内也有叫法叫做 <strong>非对称加密</strong> ，我个人比较喜欢后者,不过在这里为了更好的说明原理就是用学术名称.</p><p>&ensp;&ensp;&ensp;&ensp;公开密钥加密 由两部分组成，一部分是如其名称是一个公共密钥，公钥可以被别人所知，另一个是私有密钥，私钥只能自己知道. 公共密钥加密看似比普通的单密钥加密多了一个公钥,但是这确是 公开密钥加密算法的精髓,保证其能在非安全网络环境下进行安全传输的关键.</p><h2 id="公开密钥加密的原理"><a href="#公开密钥加密的原理" class="headerlink" title="公开密钥加密的原理"></a>公开密钥加密的原理</h2><p>&ensp;&ensp;&ensp;&ensp;简单来说，公开密钥加密的核心是采用基于数学问题的密码算法，产生一个公钥和一个密钥，公钥和密钥加密的消息只能由对应的密钥和公钥解密，其自身也无法解密，这种情况下，可以把公钥放出去，因为只有私钥可以解密，任何对密文的修改都会导致私钥无法解密，所以可以在非安全的网络环境下传输。</p><h3 id="公开密钥加密的数学原理-RSA算法"><a href="#公开密钥加密的数学原理-RSA算法" class="headerlink" title="公开密钥加密的数学原理 (RSA算法)"></a>公开密钥加密的数学原理 (RSA算法)</h3><p>&ensp;&ensp;&ensp;&ensp;这里以RSA算法为版本进行讲解。假设A和B想过通过一个不安全的网络信道进行通信，那么A可以通过以下方式来产生一个公钥和一个密钥</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>随意选择两个大的素数 p和q,p!=q,计算 N=pq</span><br><span class="line"><span class="number">2.</span>根据欧拉函数，r = φ (N) = φ(p)φ(q) = φ(p<span class="number">-1</span>)φ(q<span class="number">-1</span>)</span><br><span class="line"><span class="number">3.</span>选择一个小于r,并且与r互质的整数e,并求e关于r的模逆元，命名为d (求d令ed = <span class="number">1</span> (mod r))</span><br><span class="line"><span class="number">4.</span>将 p 和 q 销毁</span><br><span class="line"><span class="number">5.</span>(N,e)为公钥,(N,d)为私钥</span><br></pre></td></tr></table></figure><p>&ensp;&ensp;&ensp;&ensp;如此，B在得知A的公钥(N,e)后，如果想要给A发送一个消息，可以通过提前约定的格式把明文m转化为一个小于N的非负整数n，通过公式 <strong>$c \equiv n^e \pmod{N}$</strong> 来将密文m转化为c，并且将其传输给a</p><p>&ensp;&ensp;&ensp;&ensp;并且，a在得到密文c后通过 <strong>$n \equiv c^d \pmod{N}$</strong> 来解出n,并且通过约定的格式还原出m.</p><p>解码的原理是<br><strong>$c^d \equiv n^{e \cdot d} \pmod{N}$</strong></p><p>已知 <strong>$e \cdot d \equiv 1 \pmod{r}$</strong>,即 <strong>$ed = 1 +h\varphi (n)$</strong>.由 欧拉定理可得：</p><p><strong>$n^{ed}=n^{1+h\varphi(n)}=n \left(n^{\varphi(N)}\right)^{h} \equiv n(1)^h \pmod{N} \equiv n \ \pmod{N}$</strong></p><p>由此，就形成了一次完整的RSA公开密钥加密的加密和解密过程。</p><h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><ul><li><input disabled="" type="checkbox"> 加上参考链接</li><li><input disabled="" type="checkbox"> 加上图片</li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> ssh </tag>
+            
+            <tag> rsa </tag>
+            
+            <tag> 非对称加密 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>lvalur_and_rvalue</title>
+      <link href="/2019/01/22/lvalur-and-rvalue/"/>
+      <url>/2019/01/22/lvalur-and-rvalue/</url>
+      
+        <content type="html"><![CDATA[<h1 id="cpp-的-value-category"><a href="#cpp-的-value-category" class="headerlink" title="cpp 的 value_category"></a>cpp 的 value_category</h1><p>在cpp 当中 每个表达式(带有操作数的操作符，字面值，变量名等)都有一个类型与值类型 。</p><p>值类型是在表达式求值期间创建，复制和移动临时对象时编译器必须遵循的规则的基础，并且只属于三种类型的其中之一：prvalue xvalue lvalue。</p><h2 id="TODO-等待补充"><a href="#TODO-等待补充" class="headerlink" title="TODO 等待补充"></a>TODO 等待补充</h2>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> cpp </tag>
+            
+            <tag> lvalue </tag>
+            
+            <tag> rvalue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>copy_and_deepcopy</title>
+      <link href="/2018/12/22/copy-and-deepcopy/"/>
+      <url>/2018/12/22/copy-and-deepcopy/</url>
+      
+        <content type="html"><![CDATA[<h2 id="copy-and-deepcopy"><a href="#copy-and-deepcopy" class="headerlink" title="copy and deepcopy"></a>copy and deepcopy</h2><p>在python3 中 复制分为三种,即 “赋值” “浅拷贝” “深拷贝”.python 官方文档解释如下</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Assignment statements in Python do not copy objects, they create bindings between a target and an object. For collections that are mutable or contain mutable items, a copy is sometimes needed so one can change one copy without changing the other. This module provides generic shallow and deep copy operations (explained below).</span><br></pre></td></tr></table></figure><h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p>赋值即利用 “=” 号运算符进行赋值, 但是这种赋值其本质是 “引用”, 即 重新创建一个变量名,然后绑定到 “=” 号右值的地址,这种情况下,<strong>任何对新创建的变量进行的修改都会同步到旧的变量上!</strong></p><p>案例如下:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; old &#x3D; 2</span><br><span class="line">&gt;&gt;&gt; new &#x3D; old</span><br><span class="line">&gt;&gt;&gt; id(old)</span><br><span class="line">140721449431328</span><br><span class="line">&gt;&gt;&gt; id(new)</span><br><span class="line">140721449431328</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; old &#x3D; [1,2,3]</span><br><span class="line">&gt;&gt;&gt; new &#x3D; old</span><br><span class="line">&gt;&gt;&gt; old[0]&#x3D;&quot;1&quot;</span><br><span class="line">&gt;&gt;&gt; new</span><br><span class="line">[&#39;1&#39;, 2, 3]</span><br><span class="line">&gt;&gt;&gt; old is new</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; id(old)&#x3D;&#x3D;id(new)</span><br><span class="line">True</span><br></pre></td></tr></table></figure><p>PS:总结来说,则是<strong>创建了一个新的变量名.然后指向旧变量的地址</strong></p><h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><p>第二种即是我们常说的 <strong>浅拷贝</strong> 这种拷贝是在于自定义的数据类型 被 “=” 运算符使用时所发生的.这种情况下 任何简易的修改(指 第一层引用的修改) 并不会改动另一个变量,但是在修改深处的值时,则依旧会影响到</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import copy</span><br><span class="line">&gt;&gt;&gt; old &#x3D; [1,2,[3,4]]</span><br><span class="line">&gt;&gt;&gt; new &#x3D; copy.copy(old)</span><br><span class="line">&gt;&gt;&gt; old[0]&#x3D;&quot;1&quot;</span><br><span class="line">&gt;&gt;&gt; old</span><br><span class="line">[&#39;1&#39;, 2, [3, 4]]</span><br><span class="line">&gt;&gt;&gt; new</span><br><span class="line">[1, 2, [3, 4]]</span><br><span class="line">&gt;&gt;&gt; old[2][0] &#x3D; &quot;3&quot;</span><br><span class="line">&gt;&gt;&gt; old</span><br><span class="line">[&#39;1&#39;, 2, [&#39;3&#39;, 4]]</span><br><span class="line">&gt;&gt;&gt; new</span><br><span class="line">[1, 2, [&#39;3&#39;, 4]]</span><br></pre></td></tr></table></figure><p>PS:总结来说,<strong>浅拷贝在复制的时候,对于变量的第一层地址.创建了新的空间.但是对于第二层以下的地址.则是直接偷懒.把地址复制了赋予左边,并没有开创同等的空间</strong></p><h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>第三种 深拷贝 才是真正意义上的完全拷贝.即重新创建与右值同样大小的空间.然后循环复制.这种情况下.新创建的变量无论如何修改都不会影响到旧的变量</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import copy</span><br><span class="line">&gt;&gt;&gt; old &#x3D; [1,2,[3,4]]</span><br><span class="line">&gt;&gt;&gt; new &#x3D; copy.deepcopy(old)</span><br><span class="line">&gt;&gt;&gt; new</span><br><span class="line">[1, 2, [3, 4]]</span><br><span class="line">&gt;&gt;&gt; new[0]&#x3D;&quot;1&quot;</span><br><span class="line">&gt;&gt;&gt; new[2][0]&#x3D;&quot;3&quot;</span><br><span class="line">&gt;&gt;&gt; new</span><br><span class="line">[&#39;1&#39;, 2, [&#39;3&#39;, 4]]</span><br><span class="line">&gt;&gt;&gt; old</span><br><span class="line">[1, 2, [3, 4]]</span><br></pre></td></tr></table></figure><h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p><a href="https://docs.python.org/3/library/copy.html" target="_blank" rel="noopener">https://docs.python.org/3/library/copy.html</a></p><h5 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h5><pre><code>[ ] 加上图片</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> python3 </tag>
+            
+            <tag> copy </tag>
+            
+            <tag> deepcopy </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
