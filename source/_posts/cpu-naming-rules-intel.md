@@ -7,6 +7,7 @@ tags:
 - intel
 - 杂谈
 description: intel cpu 命名规则
+comments: true
 # mathjax: true
 ---
 intel cpu 型号众多，大概清理了一下命名规则
