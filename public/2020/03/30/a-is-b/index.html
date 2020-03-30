@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>a is b ? | askr's blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">a is b ?</h1><a id="logo" href="/.">askr's blog</a><p class="description">book box</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">a is b ?</h1><div class="post-meta">Mar 30, 2020</div><a class="disqus-comment-count" data-disqus-identifier="2020/03/30/a-is-b/" href="/2020/03/30/a-is-b/#disqus_thread"></a><div class="post-content"><p>今天在社区 遇到一个蛮有意思的问题,分享出来给大家</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;猜测一下运行结果是否为True</span><br><span class="line">a &#x3D; &quot;some_string&quot;</span><br><span class="line">b &#x3D; &quot;some&quot; + &quot;_&quot; + &quot;string&quot;</span><br><span class="line"></span><br><span class="line">c &#x3D; &quot;hello&quot;</span><br><span class="line">d &#x3D; &quot;hello&quot;</span><br><span class="line"></span><br><span class="line">e &#x3D; &quot;hello!&quot;</span><br><span class="line">f &#x3D; &quot;hello!&quot;</span><br><span class="line"></span><br><span class="line">g,h &#x3D; &quot;hello!&quot;,&quot;hello!&quot;</span><br><span class="line"></span><br><span class="line">print(a is b, c is d, e is f,g is h)</span><br></pre></td></tr></table></figure>
+
+<h2 id="第一次解答"><a href="#第一次解答" class="headerlink" title="第一次解答"></a>第一次解答</h2><p>刚开始,在没有实际运行的情况下,因为考虑到小数据池的原因,猜测答案为 false true true true</p>
+<p>具体解释为</p>
+<p>1.无法确定 解释器否会把表达式求值后在进行引用小数据池中的内容，所以未false</p>
+<p>2.很简单的小数据池 引用 所以为 true</p>
+<p>3.同上</p>
+<p>4.同上</p>
+<hr>
+<h2 id="实际答案"><a href="#实际答案" class="headerlink" title="实际答案"></a>实际答案</h2><p>然而,在Cpython 3.6.9 实际运行后,答案为 True True False True </p>
+<hr>
+<h2 id="解惑"><a href="#解惑" class="headerlink" title="解惑"></a>解惑</h2><p>发现实际答案后，完全能够理解第一个的结果为true,解释器可能会在表达式求值后，进行对左值的赋值或引用，然而3,4结果确十分迷惑,初步猜想是达到小数据池的阈值,可是g,h 的结果所违反,在和其他人讨论后,指向了Cpython的内部实现机制-驻留机制</p>
+<p>通常意义上来说,我们所说的Pyhton,也即Cpython的小数据池,就是由 <strong>驻留机制(intern)</strong> 所实现的,驻留机制对于字符串的隐式驻留,有一道筛选 即 <strong>只有包含ASCII字母，数字或下划线的字符串才会被隐式驻留</strong> 所以,e与f 才会被判定为不相似.在g,h中，也许是Cpython的进一步优化,在同一语句中,只创建了一个对象,然后两个引用. <strong>当然,这并不能说明其发生了隐式驻留.</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">b &#x3D; &quot;wtf!&quot;, &quot;wtf!&quot;</span><br><span class="line">c &#x3D; &quot;wtf!&quot;</span><br><span class="line">a is b</span><br><span class="line">&gt;&gt;&gt; True</span><br><span class="line">a is c</span><br><span class="line">&gt;&gt;&gt; False</span><br><span class="line">b is c</span><br><span class="line">&gt;&gt;&gt; False</span><br></pre></td></tr></table></figure>
+
+<p>这里可以看到 c 与 a 或 b 并不相同,并且在进一步尝试下发现,空字符串和单个字符串(包含非法字符)也会被驻留</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; &#39;&#39;</span><br><span class="line">b &#x3D; &#39;&#39;</span><br><span class="line">a is b</span><br><span class="line">&gt;&gt;&gt; True</span><br><span class="line">a &#x3D; &#39;_&#39;</span><br><span class="line">b &#x3D; &#39;_&#39;</span><br><span class="line">a is b</span><br><span class="line">&gt;&gt;&gt; True</span><br><span class="line">a &#x3D; &#39;&amp;&#39;</span><br><span class="line">b &#x3D; &#39;&amp;&#39;</span><br><span class="line">a is b</span><br><span class="line">&gt;&gt;&gt; True</span><br></pre></td></tr></table></figure>
+
+<p>当然,既然有隐式驻留,那么就有显示驻留,翻了一下相关文档后, 使用sys.intern 即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; intern(&quot;wtf!&quot;)</span><br><span class="line">b &#x3D; intern(&quot;wtf!&quot;)</span><br><span class="line">a is b</span><br><span class="line">&gt;&gt;&gt; True</span><br></pre></td></tr></table></figure>
+
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><ul>
+<li><input disabled="" type="checkbox"> 优化文案</li>
+<li><input disabled="" type="checkbox"> 尝试查看Cpython相关文档</li>
+</ul>
+</div><div class="tags"><a href="/tags/python3/">python3</a><a href="/tags/%E5%B0%8F%E6%95%B0%E6%8D%AE%E6%B1%A0/">小数据池</a><a href="/tags/cpython/">cpython</a><a href="/tags/%E9%A9%BB%E7%95%99%E6%9C%BA%E5%88%B6/">驻留机制</a><a href="/tags/intern/">intern</a></div><div class="post-nav"><a class="next" href="/2019/02/15/secure-shell-1/">secure_shell 简述之非对称加密</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'http://askr.cc/2020/03/30/a-is-b/';
+    this.page.identifier = '2020/03/30/a-is-b/';
+    this.page.title = 'a is b ?';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//blog-askr.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//blog-askr.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://blog-askr.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://askr.cc"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/python3/" style="font-size: 15px;">python3</a> <a href="/tags/%E5%B0%8F%E6%95%B0%E6%8D%AE%E6%B1%A0/" style="font-size: 15px;">小数据池</a> <a href="/tags/cpython/" style="font-size: 15px;">cpython</a> <a href="/tags/%E9%A9%BB%E7%95%99%E6%9C%BA%E5%88%B6/" style="font-size: 15px;">驻留机制</a> <a href="/tags/intern/" style="font-size: 15px;">intern</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/copy/" style="font-size: 15px;">copy</a> <a href="/tags/deepcopy/" style="font-size: 15px;">deepcopy</a> <a href="/tags/cpu/" style="font-size: 15px;">cpu</a> <a href="/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" style="font-size: 15px;">命名规则</a> <a href="/tags/intel/" style="font-size: 15px;">intel</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 15px;">杂谈</a> <a href="/tags/cpp/" style="font-size: 15px;">cpp</a> <a href="/tags/lvalue/" style="font-size: 15px;">lvalue</a> <a href="/tags/rvalue/" style="font-size: 15px;">rvalue</a> <a href="/tags/ssh/" style="font-size: 15px;">ssh</a> <a href="/tags/rsa/" style="font-size: 15px;">rsa</a> <a href="/tags/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/" style="font-size: 15px;">非对称加密</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/30/a-is-b/">a is b ?</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/15/secure-shell-1/">secure_shell 简述之非对称加密</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/22/lvalur-and-rvalue/">lvalur_and_rvalue</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/22/copy-and-deepcopy/">copy_and_deepcopy</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/12/cpu-naming-rules-intel/">cpu 命名规则 intel篇</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-comment-o"> Recent Comments</i></div><script type="text/javascript" src="//blog-askr.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=1&amp;avatar_size=32&amp;excerpt_length=20&amp;hide_mods=1"></script></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">askr's blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
