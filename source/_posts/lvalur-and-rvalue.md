@@ -14,4 +14,5 @@ comments: true
 
 值类型是在表达式求值期间创建，复制和移动临时对象时编译器必须遵循的规则的基础，并且只属于三种类型的其中之一：prvalue xvalue lvalue。
 
-## TODO 等待补充
+## TODO 
+- [ ] 等待补充
