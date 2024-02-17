@@ -4,8 +4,9 @@ date: 2019-03-31 14:45:42
 tags:
 - python3
 - import
-- 
+-
 ---
+
 
 # Python3 Import 之 finder
 &ensp;&ensp;&ensp;&ensp;在Python 中,导入一个模块最常见的方式就是使用 __import__ 语句, import 语句本质是对 __\_\_import\_\___ 语句的重写,不过这里并不多说, import 实际上分为两个过程,第一部分是搜索指定名称的模块,然后返回一个说明对象,另一个部分是根据前者返回的说明对象进行加载,这里我们首先说第一部分.
