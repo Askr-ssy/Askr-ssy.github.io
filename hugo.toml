@@ -1,5 +1,39 @@
 baseURL = 'https://blog.askr.cc/'
-languageCode = 'zh-cn'
+
+languageCode = "zh-CN"
+languageName = "简体中文"
+hasCJKLanguage = true
+enableEmoji = true
+
 title = 'sunflower'
 theme = 'LoveIT'
 publishDir = 'docs'
+
+[author]
+  name = "askr"
+  email = "mail@askr.cc"
+  link = ""
+
+
+[params.page.comment]
+      enable = true
+      # giscus comment config (https://giscus.app/)
+      # giscus comment 评论系统设置 (https://giscus.app/zh-CN)
+      [params.page.comment.giscus]
+        # You can refer to the official documentation of giscus to use the following configuration.
+        # 你可以参考官方文档来使用下列配置
+        enable = true
+        repo = "Askr-ssy/Askr-ssy.github.io"
+        repoId = "MDEwOlJlcG9zaXRvcnkyMTkxMTk1MDU="
+        category = "Announcements"
+        categoryId = "DIC_kwDODQ9_kc4CdTvY"
+        # automatically adapt the current theme i18n configuration when empty
+        # 为空时自动适配当前主题 i18n 配置
+        lang = "zh-CN"
+        mapping = "pathname"
+        reactionsEnabled = "1"
+        emitMetadata = "1"
+        inputPosition = "top"
+        lazyLoading = true
+        lightTheme = "preferred_color_scheme"
+        darkTheme = "dark"
