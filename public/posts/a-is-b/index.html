@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>a is b ? - sunflower</title><meta name="Description" content="Cpython 的驻留模式"><meta property="og:title" content="a is b ?" />
+<meta property="og:description" content="Cpython 的驻留模式" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.askr.cc/posts/a-is-b/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-03-30T23:20:00+00:00" />
+<meta property="article:modified_time" content="2020-03-30T23:20:00+00:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="a is b ?"/>
+<meta name="twitter:description" content="Cpython 的驻留模式"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.askr.cc/posts/a-is-b/" /><link rel="prev" href="https://blog.askr.cc/posts/python3-import/" /><link rel="next" href="https://blog.askr.cc/posts/docker-images-part1-reducing-image-size/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "a is b ?",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.askr.cc\/posts\/a-is-b\/"
+        },"genre": "posts","keywords": "python3, 小数据池, cpython, 驻留机制, intern","wordcount":  153 ,
+        "url": "https:\/\/blog.askr.cc\/posts\/a-is-b\/","datePublished": "2020-03-30T23:20:00+00:00","dateModified": "2020-03-30T23:20:00+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": "Cpython 的驻留模式"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="sunflower">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="sunflower">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">a is b ?</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-03-30">2020-03-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;153 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#问题">问题</a></li>
+    <li><a href="#第一次解答">第一次解答</a></li>
+    <li><a href="#实际答案">实际答案</a></li>
+    <li><a href="#解惑">解惑</a></li>
+    <li><a href="#todo">TODO</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>今天在社区 遇到一个蛮有意思的问题,分享出来给大家</p>
+<h2 id="问题">问题</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#f92672">//</span>猜测一下运行结果是否为True
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;some_string&#34;</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;some&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;string&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello&#34;</span>
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>e <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello!&#34;</span>
+</span></span><span style="display:flex;"><span>f <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello!&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>g,h <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello!&#34;</span>,<span style="color:#e6db74">&#34;hello!&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(a <span style="color:#f92672">is</span> b, c <span style="color:#f92672">is</span> d, e <span style="color:#f92672">is</span> f,g <span style="color:#f92672">is</span> h)
+</span></span></code></pre></div><h2 id="第一次解答">第一次解答</h2>
+<p>刚开始,在没有实际运行的情况下,因为考虑到小数据池的原因,猜测答案为 false true true true</p>
+<p>具体解释为</p>
+<p>1.无法确定 解释器否会把表达式求值后在进行引用小数据池中的内容，所以未false</p>
+<p>2.很简单的小数据池 引用 所以为 true</p>
+<p>3.同上</p>
+<p>4.同上</p>
+<hr>
+<h2 id="实际答案">实际答案</h2>
+<p>然而,在Cpython 3.6.9 实际运行后,答案为 True True False True</p>
+<hr>
+<h2 id="解惑">解惑</h2>
+<p>发现实际答案后，完全能够理解第一个的结果为true,解释器可能会在表达式求值后，进行对左值的赋值或引用，然而3,4结果确十分迷惑,初步猜想是达到小数据池的阈值,可是g,h 的结果所违反,在和其他人讨论后,指向了Cpython的内部实现机制-驻留机制</p>
+<p>通常意义上来说,我们所说的Pyhton,也即Cpython的小数据池,就是由 <strong>驻留机制(intern)</strong> 所实现的,驻留机制对于字符串的隐式驻留,有一道筛选 即 <strong>只有包含ASCII字母，数字或下划线的字符串才会被隐式驻留</strong> 所以,e与f 才会被判定为不相似.在g,h中，也许是Cpython的进一步优化,在同一语句中,只创建了一个对象,然后两个引用. <strong>当然,这并不能说明其发生了隐式驻留.</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;wtf!&#34;</span>, <span style="color:#e6db74">&#34;wtf!&#34;</span>
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;wtf!&#34;</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">is</span> b
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">is</span> c
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">is</span> c
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">False</span>
+</span></span></code></pre></div><p>这里可以看到 c 与 a 或 b 并不相同,并且在进一步尝试下发现,空字符串和单个字符串(包含非法字符)也会被驻留</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">is</span> b
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;_&#39;</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;_&#39;</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">is</span> b
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&amp;&#39;</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&amp;&#39;</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">is</span> b
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">True</span>
+</span></span></code></pre></div><p>当然,既然有隐式驻留,那么就有显示驻留,翻了一下相关文档后, 使用sys.intern 即可</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> intern(<span style="color:#e6db74">&#34;wtf!&#34;</span>)
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> intern(<span style="color:#e6db74">&#34;wtf!&#34;</span>)
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">is</span> b
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">True</span>
+</span></span></code></pre></div><h2 id="todo">TODO</h2>
+<ul>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 优化文案</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 尝试查看Cpython相关文档</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-03-30</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://blog.askr.cc/posts/a-is-b/" data-title="a is b ?" data-hashtags="python3,小数据池,cpython,驻留机制,intern"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://blog.askr.cc/posts/a-is-b/" data-hashtag="python3"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://blog.askr.cc/posts/a-is-b/" data-title="a is b ?"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://blog.askr.cc/posts/a-is-b/" data-title="a is b ?"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://blog.askr.cc/posts/a-is-b/" data-title="a is b ?"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python3/">python3</a>,&nbsp;<a href="/tags/%E5%B0%8F%E6%95%B0%E6%8D%AE%E6%B1%A0/">小数据池</a>,&nbsp;<a href="/tags/cpython/">cpython</a>,&nbsp;<a href="/tags/%E9%A9%BB%E7%95%99%E6%9C%BA%E5%88%B6/">驻留机制</a>,&nbsp;<a href="/tags/intern/">intern</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/python3-import/" class="prev" rel="prev" title="python3_import"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>python3_import</a>
+            <a href="/posts/docker-images-part1-reducing-image-size/" class="next" rel="next" title="[翻译]Docker镜像:第一部分-减少镜像大小">[翻译]Docker镜像:第一部分-减少镜像大小<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.122.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

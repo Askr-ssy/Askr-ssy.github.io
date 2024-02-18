@@ -1,0 +1,48 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>python3 - Tag - sunflower</title>
+        <link>https://blog.askr.cc/tags/python3/</link>
+        <description>python3 - Tag - sunflower</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 30 Mar 2020 23:20:00 &#43;0000</lastBuildDate><atom:link href="https://blog.askr.cc/tags/python3/" rel="self" type="application/rss+xml" /><item>
+    <title>a is b ?</title>
+    <link>https://blog.askr.cc/posts/a-is-b/</link>
+    <pubDate>Mon, 30 Mar 2020 23:20:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://blog.askr.cc/posts/a-is-b/</guid>
+    <description><![CDATA[今天在社区 遇到一个蛮有意思的问题,分享出来给大家
+问题 //猜测一下运行结果是否为True a = &#34;some_string&#34; b = &#34;some&#34; + &#34;_&#34; + &#34;string&#34; c = &#34;hello&#34; d = &#34;hello&#34; e = &#34;hello!&#34; f = &#34;hello!&#34; g,h = &#34;hello!&#34;,&#34;hello!&#34; print(a is b, c is d, e is f,g is h) 第一次解答 刚开始,在没有实际运行的情况下,因为考虑到小数据池的原因,猜测答案为 false true true true
+具体解释为
+1.无法确定 解释器否会把表达式求值后在进行引用小数据池中的内容，所以未false
+2.很简单的小数据池 引用 所以为 true
+3.同上
+4.同上
+实际答案 然而,在Cpython 3.6.9 实际运行后,答案为 True True False True
+解惑 发现实际答案后，完全能够理解第一个的结果为true,解释器可能会在表达式求值后，进行对左值的赋值或引用，然而3,4结果确十分迷惑,初步猜想是达到小数据池的阈值,可是g,h 的结果所违反,在和其他人讨论后,指向了Cpython的内部实现机制-驻留机制
+通常意义上来说,我们所说的Pyhton,也即Cpython的小数据池,就是由 驻留机制(intern) 所实现的,驻留机制对于字符串的隐式驻留,有一道筛选 即 只有包含ASCII字母，数字或下划线的字符串才会被隐式驻留 所以,e与f 才会被判定为不相似.]]></description>
+</item>
+<item>
+    <title>python3_import</title>
+    <link>https://blog.askr.cc/posts/python3-import/</link>
+    <pubDate>Sun, 31 Mar 2019 14:45:42 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://blog.askr.cc/posts/python3-import/</guid>
+    <description><![CDATA[Python3 Import 之 finder 在Python 中,导入一个模块最常见的方式就是使用 import 语句, import 语句本质是对 __import__ 语句的重写,不过这里并不多说, import 实际上分为两个过程,第一部分是搜索指定名称的模块,然后返回一个说明对象,另一个部分是根据前者返回的说明对象进行加载,这里我们首先说第一部分.
+sys.modules 首先,Python 会对sys.modules 进行搜索, modules 这里起到了缓存之前导入的所有模块的作用. 如果在搜索 sys.modules 中找模块名称关联的值,那么说明其不是第一次导入,其关联的值就是需要导入的模块,导入过程完成.
+这里有需要注意的几点
+sys.modules是可写的 删除key 并不会破坏关联的模块(因为其他模块可能会保留对它的引用),但会使模块名的缓存目录失效,导致下次导入时,重新搜索. 如果 sys.modules 中存在指定的名称，但是关联值却为 none 那么会引发 ModuleNotFoundError。 如果指定名称的模块在 sys.modules 找不到，则将发起调用 Python 的导入协议以查找和加载该模块. 此协议由两个概念性模块构成，即 查找器 和 加载器 .查找器的任务是确定是否能使用其所知的策略找到该名称的模块。 同时实现这两种接口的对象称为 导入器 它们在确定能加载所需的模块时会返回其自身。
+sys.meta_path Python默认包含三个导入器, 第一个知道如何定位内置模块，第二个知道如何定位冻结模块。 第三个默认查找器会在 导入路径中(一般为sys.path) 中搜索模块。 导入路径 是一个由文件系统路径或 zip 文件组成的位置列表。 它还可以扩展为搜索任意可定位资源，例如由 URL 指定的资源。
+PS: 可以在sys.meta_path 看到默认包含的三个导入器
+PS:导入机制是可扩展的，因此可以加入新的查找器以扩展模块搜索的范围和作用域
+find_spec() Python 中,如果你在sys.modules中无法找到模块,那么会搜索sys.meta_path ,其中包含 元路径查找器 对象列表,查找器必须实现 find_spec() 这一方法，该方法接受三个参数：名称、导入路径和目标模块（可选，元路径查找器可使用任何策略来确定它是否能处理指定名称的模块。]]></description>
+</item>
+<item>
+    <title>copy_and_deepcopy</title>
+    <link>https://blog.askr.cc/posts/copy-and-deepcopy/</link>
+    <pubDate>Sat, 22 Dec 2018 13:43:36 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://blog.askr.cc/posts/copy-and-deepcopy/</guid>
+    <description><![CDATA[copy and deepcopy 在python3 中 复制分为三种,即 &ldquo;赋值&rdquo; &ldquo;浅拷贝&rdquo; &ldquo;深拷贝&rdquo;.python 官方文档解释如下
+Assignment statements in Python do not copy objects, they create bindings between a target and an object. For collections that are mutable or contain mutable items, a copy is sometimes needed so one can change one copy without changing the other. This module provides generic shallow and deep copy operations (explained below). 赋值 赋值即利用 &ldquo;=&rdquo; 号运算符进行赋值, 但是这种赋值其本质是 “引用”, 即 重新创建一个变量名,然后绑定到 &ldquo;=&rdquo; 号右值的地址,这种情况下,任何对新创建的变量进行的修改都会同步到旧的变量上!]]></description>
+</item>
+</channel>
+</rss>

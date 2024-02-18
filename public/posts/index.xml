@@ -1,0 +1,134 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>All Posts - sunflower</title>
+        <link>https://blog.askr.cc/posts/</link>
+        <description>All Posts | sunflower</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 20 May 2020 11:19:40 &#43;0000</lastBuildDate><atom:link href="https://blog.askr.cc/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>IPC-进程间通信</title>
+    <link>https://blog.askr.cc/posts/inter-process-communication-1/</link>
+    <pubDate>Wed, 20 May 2020 11:19:40 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://blog.askr.cc/posts/inter-process-communication-1/</guid>
+    <description><![CDATA[本机 - 不同进程之间的通讯 在计算机科学当中，不同进程都有独立的系统资源，进程与进程之间是相互隔离的。这时，为了让不同的进程互相访问资源并进行协调工作，才有了进程间通信。
+通常，进程间通信分为C/S，使用操作系统提供的以下接口来进行通信，这里大致从传输速率，传输介质，安全性，数据易管理性简单说下。
+文件 在指定的目录利用文件来进行通信，也是一个简单粗暴，但是在架构简单的情况下十分好用的方式，只要处理好读写锁，适用于进程大量读取数据，少量修改的情况，缺点是进程间的通信介质为磁盘，传输速率被限制，而且安全性依靠文件系统，需要自己去在程序中管理文件，不是很方便。
+信号(Signal) 信号是 *nix系统和其他兼容POSIX的操作系统中才会使用的，信号是一种通知，它会发送一个指定的信号给进程，如&quot;SIGABRT&quot;,&ldquo;SIGKILL&rdquo;,&ldquo;SIGSTOP&quot;等，操作系统会执行进程的 信号处理程序，如果没有，则执行默认程序。
+信号是由操作系统支持的，所以传输速率很快，但是每次传输的数据量很少，最多不超过 2^6 个,传输介质可以视为cpu,但是如果使用信号作为数据的传输手段，那么安全会有很大的问题，因为信号原本是作为对进程的控制而使用的，贸然使用会破坏原本对进程的控制手段，更有可能在进程变成僵尸进程的时候，没有解决手段。而作为一个对单一进程发送数据的手段来所，基本不需要考虑管理性。
+Socket (NetWork) 本质是操作系统为进程提供的面向网络的，一种进程通信手段，通常是指使用IP协议的Socket,用于和网络中其他进程的通信，不过在终端 指向本机的时候也可以和本机中的其他进程通信，传输介质根据网络速率而定，介质是网络，安全性在基于tcp的情况下是可以保证的，管理性算是不错，但是需要自己去进行管理。
+Socket (Unix domain) Socket 原本是为网络通讯设计的，但后来在Socket的框架上发展出一种IPC机制，即是 Unix Socket，是操作系统提供的，用于同一台机器上不同进程与不同进程之间的通信，传输速率因为是字节通过内核，速率并不算满，介质可以视为CPU，安全性可以保证，管理性也算不错
+消息队列 消息队列 更多的情况用于网络传输数据等，利用队列的结构来实现，优点是异步，可以容纳较多的消息等，本机的情况下，传输速率 应该是由实现软件来实现，介质可以使为内存，如果考虑到持久化的情况，可能速度会稍慢，安全性由实现来决定，不过一般成熟的框架的安全性是可以保证的，数据的管理性因为队列的结构，可以说是十分不错
+Pipe (匿名) 匿名通道 基本是用于父进程和子进程之间的通信，父进程创建一个通道，fork的时候，把子进程和父进程的通道链接到一起，半工通信，生命周期基于父进程，传输速率很快，介质视为CPU，安全性不错，但是数据的管理性并不是很好
+Pipe (命名) 命名通道 是匿名通道的加强版，可以用于任意进程之间的通信，而不像是匿名通道只能用与父进程与子进程的通信，生命周期不被父进程限制，具体由文件系统实现，传输速率不错，传输介质为文件，安全性还可以(？)，管理性还可以。
+共享内存 通常是值 由某个进程，所创建的可以被其他进程所访问的内存区域，具体实现由操作系统来决定，传输速率较快，介质为内存，安全性较高，数据管理性较差。
+Memory-mapped file 等待补完
+TODO 补完Memory-mapped file 严格给出传输速率，安全性，管理性的定义 严格确定各种通信手段的介质 画出图表 重新真理语言 ]]></description>
+</item>
+<item>
+    <title>Unicode_and_Utf-8</title>
+    <link>https://blog.askr.cc/posts/unicode-and-utf-8/</link>
+    <pubDate>Fri, 17 Apr 2020 01:37:35 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://blog.askr.cc/posts/unicode-and-utf-8/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>[翻译]Docker镜像:第一部分-减少镜像大小</title>
+    <link>https://blog.askr.cc/posts/docker-images-part1-reducing-image-size/</link>
+    <pubDate>Fri, 03 Apr 2020 17:38:13 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://blog.askr.cc/posts/docker-images-part1-reducing-image-size/</guid>
+    <description><![CDATA[该文为翻译文章,因文章写的太好,见猎心喜,未拿到原作者授权,侵删.
+原文链接
+以下为正文
+介绍 在刚开始使用容器的时候,很容易被我们所生成的镜像大小震惊.我们将回顾许多在不缩减开发人员和维护人员的便捷性的情况下,同时缩减镜像尺寸的技术.在第一部分中,我们将讨论多阶段构建,因为任何想要缩减镜像大小的人都需要从这开始.我们还将说明静态链接和动态链接之间的区别,以及为什么我们要关心它.同时,这也是介绍Alpine1的机会.
+在第二部分,我们将看到与各种流行语言有关的一些特殊性.我们将讨论 GO,以及Java,Node,Python,Ruby,Rust.我们还将讨论有关Alpine的更多信息,以及如何全面利用Alpine.
+在第三部分中,我们将介绍一些与大多数语言和框架相关的 Pattern ( and anti-patterns! ),例如使用通用基础镜像,分离二进制文件并减小大小.我们将总结一些更奇特的或高级的方法,例如 Bazel,Distroless,DockerSlim或UPX . 我们将看到其中的一些方法在某些情况下会适得其反,但在某些特定情况下可能会有用.
+请注意,示例代码以及此处提到的所有Dockerfile,都可以在公共GitHub存储库中方便地获得,并带有一个Compose文件来构建所有镜像并轻松比较它们的大小.
+我们正在尝试解决的问题 我敢打赌,每个构建了第一个Docker镜像并编译了一些代码的人都对该镜像的大小感到惊讶.
+看看用C编写的这个繁琐的 &ldquo;hello world&rdquo; 程序：
+/* hello.c */ int main () { puts(&#34;Hello, world!&#34;); return 0; } 我们可以使用下面这个Dockerfile构建它：
+FROM gcc COPY hello.c . RUN gcc -o hello hello.c CMD [&#34;./hello&#34;] 但是生成的镜像将超过1 GB,因为它包含着整个gcc镜像！
+如果我们使用Ubuntu镜像,安装一个C编译器,然后编译程序,我们将得到300 MB镜像；看起来更棒,但对于本身小于20 kB的二进制文件而言,仍然太多了：
+$ ls -l hello -rwxr-xr-x 1 root root 16384 Nov 18 14:36 hello 一个同等效果的Go程序：
+package main import &#34;fmt&#34; func main () { fmt.]]></description>
+</item>
+<item>
+    <title>a is b ?</title>
+    <link>https://blog.askr.cc/posts/a-is-b/</link>
+    <pubDate>Mon, 30 Mar 2020 23:20:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://blog.askr.cc/posts/a-is-b/</guid>
+    <description><![CDATA[今天在社区 遇到一个蛮有意思的问题,分享出来给大家
+问题 //猜测一下运行结果是否为True a = &#34;some_string&#34; b = &#34;some&#34; + &#34;_&#34; + &#34;string&#34; c = &#34;hello&#34; d = &#34;hello&#34; e = &#34;hello!&#34; f = &#34;hello!&#34; g,h = &#34;hello!&#34;,&#34;hello!&#34; print(a is b, c is d, e is f,g is h) 第一次解答 刚开始,在没有实际运行的情况下,因为考虑到小数据池的原因,猜测答案为 false true true true
+具体解释为
+1.无法确定 解释器否会把表达式求值后在进行引用小数据池中的内容，所以未false
+2.很简单的小数据池 引用 所以为 true
+3.同上
+4.同上
+实际答案 然而,在Cpython 3.6.9 实际运行后,答案为 True True False True
+解惑 发现实际答案后，完全能够理解第一个的结果为true,解释器可能会在表达式求值后，进行对左值的赋值或引用，然而3,4结果确十分迷惑,初步猜想是达到小数据池的阈值,可是g,h 的结果所违反,在和其他人讨论后,指向了Cpython的内部实现机制-驻留机制
+通常意义上来说,我们所说的Pyhton,也即Cpython的小数据池,就是由 驻留机制(intern) 所实现的,驻留机制对于字符串的隐式驻留,有一道筛选 即 只有包含ASCII字母，数字或下划线的字符串才会被隐式驻留 所以,e与f 才会被判定为不相似.]]></description>
+</item>
+<item>
+    <title>python3_import</title>
+    <link>https://blog.askr.cc/posts/python3-import/</link>
+    <pubDate>Sun, 31 Mar 2019 14:45:42 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://blog.askr.cc/posts/python3-import/</guid>
+    <description><![CDATA[Python3 Import 之 finder 在Python 中,导入一个模块最常见的方式就是使用 import 语句, import 语句本质是对 __import__ 语句的重写,不过这里并不多说, import 实际上分为两个过程,第一部分是搜索指定名称的模块,然后返回一个说明对象,另一个部分是根据前者返回的说明对象进行加载,这里我们首先说第一部分.
+sys.modules 首先,Python 会对sys.modules 进行搜索, modules 这里起到了缓存之前导入的所有模块的作用. 如果在搜索 sys.modules 中找模块名称关联的值,那么说明其不是第一次导入,其关联的值就是需要导入的模块,导入过程完成.
+这里有需要注意的几点
+sys.modules是可写的 删除key 并不会破坏关联的模块(因为其他模块可能会保留对它的引用),但会使模块名的缓存目录失效,导致下次导入时,重新搜索. 如果 sys.modules 中存在指定的名称，但是关联值却为 none 那么会引发 ModuleNotFoundError。 如果指定名称的模块在 sys.modules 找不到，则将发起调用 Python 的导入协议以查找和加载该模块. 此协议由两个概念性模块构成，即 查找器 和 加载器 .查找器的任务是确定是否能使用其所知的策略找到该名称的模块。 同时实现这两种接口的对象称为 导入器 它们在确定能加载所需的模块时会返回其自身。
+sys.meta_path Python默认包含三个导入器, 第一个知道如何定位内置模块，第二个知道如何定位冻结模块。 第三个默认查找器会在 导入路径中(一般为sys.path) 中搜索模块。 导入路径 是一个由文件系统路径或 zip 文件组成的位置列表。 它还可以扩展为搜索任意可定位资源，例如由 URL 指定的资源。
+PS: 可以在sys.meta_path 看到默认包含的三个导入器
+PS:导入机制是可扩展的，因此可以加入新的查找器以扩展模块搜索的范围和作用域
+find_spec() Python 中,如果你在sys.modules中无法找到模块,那么会搜索sys.meta_path ,其中包含 元路径查找器 对象列表,查找器必须实现 find_spec() 这一方法，该方法接受三个参数：名称、导入路径和目标模块（可选，元路径查找器可使用任何策略来确定它是否能处理指定名称的模块。]]></description>
+</item>
+<item>
+    <title>copy_and_deepcopy</title>
+    <link>https://blog.askr.cc/posts/copy-and-deepcopy/</link>
+    <pubDate>Sat, 22 Dec 2018 13:43:36 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://blog.askr.cc/posts/copy-and-deepcopy/</guid>
+    <description><![CDATA[copy and deepcopy 在python3 中 复制分为三种,即 &ldquo;赋值&rdquo; &ldquo;浅拷贝&rdquo; &ldquo;深拷贝&rdquo;.python 官方文档解释如下
+Assignment statements in Python do not copy objects, they create bindings between a target and an object. For collections that are mutable or contain mutable items, a copy is sometimes needed so one can change one copy without changing the other. This module provides generic shallow and deep copy operations (explained below). 赋值 赋值即利用 &ldquo;=&rdquo; 号运算符进行赋值, 但是这种赋值其本质是 “引用”, 即 重新创建一个变量名,然后绑定到 &ldquo;=&rdquo; 号右值的地址,这种情况下,任何对新创建的变量进行的修改都会同步到旧的变量上!]]></description>
+</item>
+<item>
+    <title>cpu 命名规则 intel篇</title>
+    <link>https://blog.askr.cc/posts/cpu-naming-rules-intel/</link>
+    <pubDate>Mon, 12 Nov 2018 20:20:03 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://blog.askr.cc/posts/cpu-naming-rules-intel/</guid>
+    <description><![CDATA[intel cpu 型号众多，大概清理了一下命名规则
+intel cpu 的产品系列 intel 分为 八个序列，分别为
+Core(酷睿)：主要面向中高端消费者，工作站和发烧级的处理器系列,推出时取代了当时的Pentium(奔腾)处理器的中高端定位，并将Pentium移至入门级系列，也将Celeron(赛扬)处理器推向低端系列。Xeon(至强)处理器用于服务器和工作站市场,但早期命名规则混乱，严格来说不算是连续性的品牌。Pentium：intel 早期推出的唯一处理器序列，后来衍生出低端的 Celeron 和 面向服务器的 Xeon 系列后，intel 又推出了 Core 系列取代 Pentium 系列后，彻底成为了低端处理器序列，市场定位在 Celeron 之上，Core 之下。Celeron: 早期由 Pentium 系列衍生出的低端型号~，在 Pentium 被 Core 取代后，市场定位更低了，彻底成为低端型号PXeon：早期由 Pentium 系列衍生出来，主要供服务器及工作站使用，亦有超级计算机采用此处理器，历史悠久~。Xeon Phi(至强融核)：首款英特尔集成众核（Many Integrated Core，MIC）架构产品。用作高性能计算（HPC）的超级计算机或服务器的加速卡。Itanium(安腾)：是英特尔安腾架构（通常称之为IA-64）的64位处理器，市面上出现较少，近年来也没有消息。Atom(凌动)：Intel的一个超低电压处理器系列，和 Itanium 一样，近年比较少见。Quark(夸克)：Intel 最近新出的面向物联网的处理器序列，特点是小尺寸和低功耗。 不过这里因为 Xeon Phi,Itanium,Atom,Quark 过于少见,就以常见的Core 和 Xeon 的命名规则作为讲解。
+Core 命名规则 举一个例子，一个intel 完整的名称是：
+分开解析,Core 是品牌， i7 是标识符，标明其在品牌中的定位，7 代表着代数，是第七代处理器，500是 S tock K eeping U nit,类似于图书的ISBN号，用于内部标识，但是根据实际情况，数值越大，性能越强。 U 代表着后缀，类似于修饰符的功能，一般有K(可超频)，T(功耗优化)，M(移动处理器)等。]]></description>
+</item>
+<item>
+    <title>lvalur_and_rvalue</title>
+    <link>https://blog.askr.cc/posts/lvalur-and-rvalue/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://blog.askr.cc/posts/lvalur-and-rvalue/</guid>
+    <description><![CDATA[cpp 的 value_category 在cpp 当中 每个表达式(带有操作数的操作符，字面值，变量名等)都有一个类型与值类型 。
+值类型是在表达式求值期间创建，复制和移动临时对象时编译器必须遵循的规则的基础，并且只属于三种类型的其中之一：prvalue xvalue lvalue。
+TODO 等待补充 ]]></description>
+</item>
+<item>
+    <title>secure_shell 简述之非对称加密</title>
+    <link>https://blog.askr.cc/posts/secure-shell-1/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+    <author>Author</author>
+    <guid>https://blog.askr.cc/posts/secure-shell-1/</guid>
+    <description><![CDATA[SSH简述 SSH 全称为Secure Shell , 是一种加密的 网络传输协议 ,即理论上任何网络服务都可以用SSH来安全传输，不过主要用于远程登陆系统。SSH的出现主要用于取代以往不安全的Telnet 和非安全shell的替代品，Telnet 与 Berkeley Login，rsh，rexec等协议采用明文传输，容易遭受到攻击，所以应此产生了SSH这种能在非安全网络环境下(容易受到攻击，如互联网)信息的加密完整可靠。
+SSH原理 谈到SSH就不得不提到SSH的通信原理 公开密钥加密(Public-Key Cryptography) 国内也有叫法叫做 非对称加密 ，我个人比较喜欢后者,不过在这里为了更好的说明原理就是用学术名称.
+公开密钥加密 由两部分组成，一部分是如其名称是一个公共密钥，公钥可以被别人所知，另一个是私有密钥，私钥只能自己知道. 公共密钥加密看似比普通的单密钥加密多了一个公钥,但是这确是 公开密钥加密算法的精髓,保证其能在非安全网络环境下进行安全传输的关键.
+公开密钥加密的原理 简单来说，公开密钥加密的核心是采用基于数学问题的密码算法，产生一个公钥和一个密钥，公钥和密钥加密的消息只能由对应的密钥和公钥解密，其自身也无法解密，这种情况下，可以把公钥放出去，因为只有私钥可以解密，任何对密文的修改都会导致私钥无法解密，所以可以在非安全的网络环境下传输。
+公开密钥加密的数学原理 (RSA算法) 这里以RSA算法为版本进行讲解。假设A和B想过通过一个不安全的网络信道进行通信，那么A可以通过以下方式来产生一个公钥和一个密钥
+1.随意选择两个大的素数 p和q,p!=q,计算 N=pq2.根据欧拉函数，r = φ (N) = φ(p)φ(q) = φ(p-1)φ(q-1)3.选择一个小于r,并且与r互质的整数e,并求e关于r的模逆元，命名为d (求d令ed = 1 (mod r))4.将 p 和 q 销毁5.(N,e)为公钥,(N,d)为私钥 如此，B在得知A的公钥(N,e)后，如果想要给A发送一个消息，可以通过提前约定的格式把明文m转化为一个小于N的非负整数n，通过公式 $c \equiv n^e \pmod{N}$ 来将密文m转化为c，并且将其传输给a
+并且，a在得到密文c后通过 $n \equiv c^d \pmod{N}$ 来解出n,并且通过约定的格式还原出m.
+解码的原理是 $c^d \equiv n^{e \cdot d} \pmod{N}$]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>cpu 命名规则 intel篇 - sunflower</title><meta name="Description" content="intel cpu 命名规则"><meta property="og:title" content="cpu 命名规则 intel篇" />
+<meta property="og:description" content="intel cpu 命名规则" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.askr.cc/posts/cpu-naming-rules-intel/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-11-12T20:20:03+00:00" />
+<meta property="article:modified_time" content="2018-11-12T20:20:03+00:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="cpu 命名规则 intel篇"/>
+<meta name="twitter:description" content="intel cpu 命名规则"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.askr.cc/posts/cpu-naming-rules-intel/" /><link rel="prev" href="https://blog.askr.cc/posts/lvalur-and-rvalue/" /><link rel="next" href="https://blog.askr.cc/posts/copy-and-deepcopy/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "cpu 命名规则 intel篇",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.askr.cc\/posts\/cpu-naming-rules-intel\/"
+        },"genre": "posts","keywords": "cpu, 命名规则, intel, 杂谈","wordcount":  115 ,
+        "url": "https:\/\/blog.askr.cc\/posts\/cpu-naming-rules-intel\/","datePublished": "2018-11-12T20:20:03+00:00","dateModified": "2018-11-12T20:20:03+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": "intel cpu 命名规则"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="sunflower">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="sunflower">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">cpu 命名规则 intel篇</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-11-12">2018-11-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;115 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#intel-cpu-的产品系列">intel cpu 的产品系列</a>
+      <ul>
+        <li><a href="#core-命名规则">Core 命名规则</a></li>
+        <li><a href="#xeon-命名规则">Xeon 命名规则</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考链接">参考链接</a></li>
+    <li><a href="#todo">TODO</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>intel cpu 型号众多，大概清理了一下命名规则</p>
+<h2 id="intel-cpu-的产品系列">intel cpu 的产品系列</h2>
+<hr>
+<p>intel 分为 八个序列，分别为</p>
+<pre tabindex="0"><code>    Core(酷睿)：主要面向中高端消费者，工作站和发烧级的处理器系列,推出时取代了当时的Pentium(奔腾)处理器的中高端定位，并将Pentium移至入门级系列，也将Celeron(赛扬)处理器推向低端系列。Xeon(至强)处理器用于服务器和工作站市场,但早期命名规则混乱，严格来说不算是连续性的品牌。
+ 
+    Pentium：intel 早期推出的唯一处理器序列，后来衍生出低端的 Celeron 和 面向服务器的 Xeon 系列后，intel 又推出了 Core 系列取代 Pentium 系列后，彻底成为了低端处理器序列，市场定位在 Celeron 之上，Core 之下。
+
+    Celeron: 早期由 Pentium 系列衍生出的低端型号~，在 Pentium 被 Core 取代后，市场定位更低了，彻底成为低端型号P
+
+    Xeon：早期由 Pentium 系列衍生出来，主要供服务器及工作站使用，亦有超级计算机采用此处理器，历史悠久~。
+
+    Xeon Phi(至强融核)：首款英特尔集成众核（Many Integrated Core，MIC）架构产品。用作高性能计算（HPC）的超级计算机或服务器的加速卡。
+
+    Itanium(安腾)：是英特尔安腾架构（通常称之为IA-64）的64位处理器，市面上出现较少，近年来也没有消息。
+
+    Atom(凌动)：Intel的一个超低电压处理器系列，和 Itanium 一样，近年比较少见。
+
+    Quark(夸克)：Intel 最近新出的面向物联网的处理器序列，特点是小尺寸和低功耗。
+</code></pre><p>不过这里因为 Xeon Phi,Itanium,Atom,Quark 过于少见,就以常见的Core 和 Xeon 的命名规则作为讲解。</p>
+<hr>
+<h3 id="core-命名规则">Core 命名规则</h3>
+<p>举一个例子，一个intel 完整的名称是：</p>
+<!-- raw HTML omitted -->
+<p>分开解析,Core 是品牌， i7 是标识符，标明其在品牌中的定位，7 代表着代数，是第七代处理器，500是 <strong>S</strong> tock <strong>K</strong> eeping <strong>U</strong> nit,类似于图书的ISBN号，用于内部标识，但是根据实际情况，数值越大，性能越强。
+U 代表着后缀，类似于修饰符的功能，一般有K(可超频)，T(功耗优化)，M(移动处理器)等。</p>
+<p>在一般看到一款CPU型号的时候，一般来说在 标识符(i3,i5,i7)和代数(5th,6th,7th)相同的情况下，SKU越大，性能越强，对于性能比较来说，通常是 标识符&gt;代数&gt;SKU。</p>
+<hr>
+<h3 id="xeon-命名规则">Xeon 命名规则</h3>
+<p>Xeon 系列 比较复杂，下面由两个分支，这里先拿标准的至强处理器当作案例</p>
+<!-- raw HTML omitted -->
+<p>和之前一样，Intel Xeon 是品牌，E3 是生产线区别 ，也是标识符，1 指的是单主板下最大CPU数量，2 指的是 接口类型，30 指的是 SKU ，通常在SKU后面会有一些修饰符，例如 E3-1230L V3 这种，L表示的就是低功耗的修饰符，V3 则代表了这是这款CPU型号的第三代。</p>
+<p>近年新出的 至强可扩展处理器，下面是一个经典的案例：</p>
+<!-- raw HTML omitted -->
+<p>一样，Intel Xeon 是品牌，Platium 是其型号定位，8 是 SKU level ,表示性能和级别，可以理解型号定位的细化版本，1 是处理器的代数 80 是SKU，SKU后面有可能会有一到两个修饰符。</p>
+<hr>
+<h2 id="参考链接">参考链接</h2>
+<p><a href="https://ark.intel.com/content/www/cn/zh/ark.html#@Processors" target="_blank" rel="noopener noreffer ">https://ark.intel.com/content/www/cn/zh/ark.html#@Processors</a></p>
+<hr>
+<h2 id="todo">TODO</h2>
+<ul>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 加入时间序列</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 撰写 amd 篇</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 加上图片</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 补充其他序列</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2018-11-12</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://blog.askr.cc/posts/cpu-naming-rules-intel/" data-title="cpu 命名规则 intel篇" data-hashtags="cpu,命名规则,intel,杂谈"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://blog.askr.cc/posts/cpu-naming-rules-intel/" data-hashtag="cpu"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://blog.askr.cc/posts/cpu-naming-rules-intel/" data-title="cpu 命名规则 intel篇"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://blog.askr.cc/posts/cpu-naming-rules-intel/" data-title="cpu 命名规则 intel篇"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://blog.askr.cc/posts/cpu-naming-rules-intel/" data-title="cpu 命名规则 intel篇"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/cpu/">cpu</a>,&nbsp;<a href="/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/">命名规则</a>,&nbsp;<a href="/tags/intel/">intel</a>,&nbsp;<a href="/tags/%E6%9D%82%E8%B0%88/">杂谈</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/lvalur-and-rvalue/" class="prev" rel="prev" title="lvalur_and_rvalue"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>lvalur_and_rvalue</a>
+            <a href="/posts/copy-and-deepcopy/" class="next" rel="next" title="copy_and_deepcopy">copy_and_deepcopy<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.122.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>IPC-进程间通信 - sunflower</title><meta name="Description" content="本地不同进程之间的通讯方式"><meta property="og:title" content="IPC-进程间通信" />
+<meta property="og:description" content="本地不同进程之间的通讯方式" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.askr.cc/posts/inter-process-communication-1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-05-20T11:19:40+00:00" />
+<meta property="article:modified_time" content="2020-05-20T11:19:40+00:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="IPC-进程间通信"/>
+<meta name="twitter:description" content="本地不同进程之间的通讯方式"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://blog.askr.cc/posts/inter-process-communication-1/" /><link rel="prev" href="https://blog.askr.cc/posts/unicode-and-utf-8/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "IPC-进程间通信",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/blog.askr.cc\/posts\/inter-process-communication-1\/"
+        },"genre": "posts","keywords": "IPC, socket, pipe","wordcount":  50 ,
+        "url": "https:\/\/blog.askr.cc\/posts\/inter-process-communication-1\/","datePublished": "2020-05-20T11:19:40+00:00","dateModified": "2020-05-20T11:19:40+00:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": "本地不同进程之间的通讯方式"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="sunflower">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="sunflower">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">IPC-进程间通信</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-05-20">2020-05-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;50 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#文件">文件</a></li>
+    <li><a href="#信号signal">信号(Signal)</a></li>
+    <li><a href="#socket-network">Socket (NetWork)</a></li>
+    <li><a href="#socket-unix-domain">Socket (Unix domain)</a></li>
+    <li><a href="#消息队列">消息队列</a></li>
+    <li><a href="#pipe-匿名">Pipe (匿名)</a></li>
+    <li><a href="#pipe-命名">Pipe (命名)</a></li>
+    <li><a href="#共享内存">共享内存</a></li>
+    <li><a href="#memory-mapped-file">Memory-mapped file</a>
+      <ul>
+        <li><a href="#todo">TODO</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="本机---不同进程之间的通讯">本机 - 不同进程之间的通讯</h1>
+<p>在计算机科学当中，不同进程都有独立的系统资源，进程与进程之间是相互隔离的。这时，为了让不同的进程互相访问资源并进行协调工作，才有了进程间通信。</p>
+<p>通常，进程间通信分为C/S，使用操作系统提供的以下接口来进行通信，这里大致从传输速率，传输介质，安全性，数据易管理性简单说下。</p>
+<h2 id="文件">文件</h2>
+<p>在指定的目录利用文件来进行通信，也是一个简单粗暴，但是在架构简单的情况下十分好用的方式，只要处理好读写锁，适用于进程大量读取数据，少量修改的情况，缺点是进程间的通信介质为磁盘，传输速率被限制，而且安全性依靠文件系统，需要自己去在程序中管理文件，不是很方便。</p>
+<h2 id="信号signal">信号(Signal)</h2>
+<p>信号是 *nix系统和其他兼容POSIX的操作系统中才会使用的，信号是一种通知，它会发送一个指定的信号给进程，如&quot;SIGABRT&quot;,&ldquo;SIGKILL&rdquo;,&ldquo;SIGSTOP&quot;等，操作系统会执行进程的 信号处理程序，如果没有，则执行默认程序。</p>
+<p>信号是由操作系统支持的，所以传输速率很快，但是每次传输的数据量很少，最多不超过 2^6 个,传输介质可以视为cpu,但是如果使用信号作为数据的传输手段，那么安全会有很大的问题，因为信号原本是作为对进程的控制而使用的，贸然使用会破坏原本对进程的控制手段，更有可能在进程变成僵尸进程的时候，没有解决手段。而作为一个对单一进程发送数据的手段来所，基本不需要考虑管理性。</p>
+<h2 id="socket-network">Socket (NetWork)</h2>
+<p>本质是操作系统为进程提供的面向网络的，一种进程通信手段，通常是指使用IP协议的Socket,用于和网络中其他进程的通信，不过在终端 指向本机的时候也可以和本机中的其他进程通信，传输介质根据网络速率而定，介质是网络，安全性在基于tcp的情况下是可以保证的，管理性算是不错，但是需要自己去进行管理。</p>
+<h2 id="socket-unix-domain">Socket (Unix domain)</h2>
+<p>Socket 原本是为网络通讯设计的，但后来在Socket的框架上发展出一种IPC机制，即是 Unix Socket，是操作系统提供的，用于同一台机器上不同进程与不同进程之间的通信，传输速率因为是字节通过内核，速率并不算满，介质可以视为CPU，安全性可以保证，管理性也算不错</p>
+<h2 id="消息队列">消息队列</h2>
+<p>消息队列 更多的情况用于网络传输数据等，利用队列的结构来实现，优点是异步，可以容纳较多的消息等，本机的情况下，传输速率 应该是由实现软件来实现，介质可以使为内存，如果考虑到持久化的情况，可能速度会稍慢，安全性由实现来决定，不过一般成熟的框架的安全性是可以保证的，数据的管理性因为队列的结构，可以说是十分不错</p>
+<h2 id="pipe-匿名">Pipe (匿名)</h2>
+<p>匿名通道 基本是用于父进程和子进程之间的通信，父进程创建一个通道，fork的时候，把子进程和父进程的通道链接到一起，半工通信，生命周期基于父进程，传输速率很快，介质视为CPU，安全性不错，但是数据的管理性并不是很好</p>
+<h2 id="pipe-命名">Pipe (命名)</h2>
+<p>命名通道 是匿名通道的加强版，可以用于任意进程之间的通信，而不像是匿名通道只能用与父进程与子进程的通信，生命周期不被父进程限制，具体由文件系统实现，传输速率不错，传输介质为文件，安全性还可以(？)，管理性还可以。</p>
+<h2 id="共享内存">共享内存</h2>
+<p>通常是值 由某个进程，所创建的可以被其他进程所访问的内存区域，具体实现由操作系统来决定，传输速率较快，介质为内存，安全性较高，数据管理性较差。</p>
+<h2 id="memory-mapped-file">Memory-mapped file</h2>
+<p>等待补完</p>
+<h3 id="todo">TODO</h3>
+<ul>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 补完Memory-mapped file</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 严格给出传输速率，安全性，管理性的定义</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 严格确定各种通信手段的介质</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 画出图表</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 重新真理语言</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2020-05-20</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://blog.askr.cc/posts/inter-process-communication-1/" data-title="IPC-进程间通信" data-hashtags="IPC,socket,pipe"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://blog.askr.cc/posts/inter-process-communication-1/" data-hashtag="IPC"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://blog.askr.cc/posts/inter-process-communication-1/" data-title="IPC-进程间通信"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://blog.askr.cc/posts/inter-process-communication-1/" data-title="IPC-进程间通信"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://blog.askr.cc/posts/inter-process-communication-1/" data-title="IPC-进程间通信"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/ipc/">IPC</a>,&nbsp;<a href="/tags/socket/">socket</a>,&nbsp;<a href="/tags/pipe/">pipe</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/unicode-and-utf-8/" class="prev" rel="prev" title="Unicode_and_Utf-8"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Unicode_and_Utf-8</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.122.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
