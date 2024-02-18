@@ -14,6 +14,10 @@ publishDir = 'docs'
   email = "mail@askr.cc"
   link = ""
 
+[module]
+[[module.imports]]
+    path = 'github.com/dillonzq/LoveIt'
+
 
 [params.page.comment]
       enable = true
