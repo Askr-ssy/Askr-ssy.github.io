@@ -3,35 +3,3 @@ languageCode = 'zh-cn'
 title = 'sunflower'
 theme = 'LoveIT'
 publishDir = 'docs'
-
-
-# 评论系统设置
-[params.page.comment]
-  enable = enable
-    enable = false
-    # owner/repo
-    repo = ""
-    issueTerm = "pathname"
-    label = ""
-    lightTheme = "github-light"
-    darkTheme = "github-dark"
-  # giscus comment config (https://giscus.app/)
-  # giscus comment 评论系统设置 (https://giscus.app/zh-CN)
-  [params.page.comment.giscus]
-    # You can refer to the official documentation of giscus to use the following configuration.
-    # 你可以参考官方文档来使用下列配置
-    enable = enable
-    repo = ""
-    repoId = ""
-    category = "Announcements"
-    categoryId = ""
-    # automatically adapt the current theme i18n configuration when empty
-    # 为空时自动适配当前主题 i18n 配置
-    lang = ""
-    mapping = "pathname"
-    reactionsEnabled = "1"
-    emitMetadata = "0"
-    inputPosition = "bottom"
-    lazyLoading = false
-    lightTheme = "light"
-    darkTheme = "dark"
