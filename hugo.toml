@@ -1,6 +1,10 @@
+###### hugo 全局配置 #####
+
 baseURL = 'https://blog.askr.cc/'
 
+# 语言配置
 languageCode = "zh-CN"
+defaultContentLanguage = "zh-cn"
 languageName = "简体中文"
 hasCJKLanguage = true
 enableEmoji = true
@@ -14,30 +18,78 @@ publishDir = 'docs'
   email = "mail@askr.cc"
   link = ""
 
-[module]
-[[module.imports]]
-    path = 'github.com/dillonzq/LoveIt'
+###### hugo 基础配置 #####
 
+[menu]
+  [[menu.main]]
+    weight = 1
+    identifier = "posts"
+    # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
+    pre = ""
+    # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
+    post = ""
+    name = "文章"
+    url = "/posts/"
+    # 当你将鼠标悬停在此菜单链接上时, 将显示的标题
+    title = ""
+  [[menu.main]]
+    weight = 2
+    identifier = "tags"
+    pre = ""
+    post = ""
+    name = "标签"
+    url = "/tags/"
+    title = ""
+  [[menu.main]]
+    weight = 3
+    identifier = "categories"
+    pre = ""
+    post = ""
+    name = "分类"
+    url = "/categories/"
+    title = ""
+
+# 是否使用 robots.txt
+enableRobotsTXT = true
+# 是否使用 git 信息
+enableGitInfo = true
+# 是否使用 emoji 代码
+enableEmoji = true
+
+# Hugo 解析文档的配置
+[markup]
+  # 语法高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    # false 是必要的设置 (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false
+
+###### 主题配置 #####
+[params]
+  dateFormat = "2006-01-02"
+
+[params.social]
+  GitHub = "https://github.com/Askr-ssy"
+  Email = "mail@askr.cc"
 
 [params.page.comment]
-      enable = true
-      # giscus comment config (https://giscus.app/)
-      # giscus comment 评论系统设置 (https://giscus.app/zh-CN)
-      [params.page.comment.giscus]
-        # You can refer to the official documentation of giscus to use the following configuration.
-        # 你可以参考官方文档来使用下列配置
-        enable = true
-        repo = "Askr-ssy/Askr-ssy.github.io"
-        repoId = "MDEwOlJlcG9zaXRvcnkyMTkxMTk1MDU="
-        category = "Announcements"
-        categoryId = "DIC_kwDODQ9_kc4CdTvY"
-        # automatically adapt the current theme i18n configuration when empty
-        # 为空时自动适配当前主题 i18n 配置
-        lang = "zh-CN"
-        mapping = "pathname"
-        reactionsEnabled = "1"
-        emitMetadata = "1"
-        inputPosition = "top"
-        lazyLoading = true
-        lightTheme = "preferred_color_scheme"
-        darkTheme = "dark"
+  enable = true
+  # giscus comment config (https://giscus.app/)
+  # giscus comment 评论系统设置 (https://giscus.app/zh-CN)
+  [params.page.comment.giscus]
+    # You can refer to the official documentation of giscus to use the following configuration.
+    # 你可以参考官方文档来使用下列配置
+    enable = true
+    repo = "Askr-ssy/Askr-ssy.github.io"
+    repoId = "MDEwOlJlcG9zaXRvcnkyMTkxMTk1MDU="
+    category = "Announcements"
+    categoryId = "DIC_kwDODQ9_kc4CdTvY"
+    # automatically adapt the current theme i18n configuration when empty
+    # 为空时自动适配当前主题 i18n 配置
+    lang = "zh-CN"
+    mapping = "pathname"
+    reactionsEnabled = "1"
+    emitMetadata = "1"
+    inputPosition = "top"
+    lazyLoading = true
+    lightTheme = "preferred_color_scheme"
+    darkTheme = "dark"
