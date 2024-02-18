@@ -3,3 +3,5 @@ node_modules
 .deploy_git
 
 * text=auto
+
+.hugo_build.lock
