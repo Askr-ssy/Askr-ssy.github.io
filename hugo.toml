@@ -48,6 +48,27 @@ publishDir = 'docs'
     name = "分类"
     url = "/categories/"
     title = ""
+  [[menu.main]]
+    weight = 4
+    identifier = "series"
+    pre = ""
+    post = ""
+    name = "系列"
+    url = "/series/"
+    title = ""
+  [[menu.main]]
+    weight = 5
+    identifier = "about"
+    pre = ""
+    post = ""
+    name = "关于"
+    url = "/about/"
+    title = ""
+
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+  series = 'series'
 
 # 是否使用 robots.txt
 enableRobotsTXT = true
