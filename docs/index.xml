@@ -2,7 +2,7 @@
     <channel>
         <title>sunflower</title>
         <link>https://blog.askr.cc/</link>
-        <description>This is my cool site</description>
+        <description>思想总比时间更久远。</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mail@askr.cc (askr)</managingEditor>
             <webMaster>mail@askr.cc (askr)</webMaster><lastBuildDate>Wed, 20 May 2020 11:19:40 &#43;0000</lastBuildDate>
             <atom:link href="https://blog.askr.cc/index.xml" rel="self" type="application/rss+xml" />

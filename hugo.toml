@@ -66,10 +66,16 @@ enableEmoji = true
 ###### 主题配置 #####
 [params]
   dateFormat = "2006-01-02"
+  description = "思想总比时间更久远。"
+  gitRepo = "https://github.com/Askr-ssy/Askr-ssy.github.io"
+  fingerprint = "sha256"
+  defaultTheme = "auto"
 
 [params.social]
-  GitHub = "https://github.com/Askr-ssy"
+  GitHub = "Askr-ssy"
   Email = "mail@askr.cc"
+  Steam = "0x61736b72"
+  RSS = true
 
 [params.page.comment]
   enable = true
@@ -93,3 +99,17 @@ enableEmoji = true
     lazyLoading = true
     lightTheme = "preferred_color_scheme"
     darkTheme = "dark"
+
+[params.footer]
+    enable = true
+    # LoveIt 新增 | 0.2.0 自定义内容 (支持 HTML 格式)
+    custom = ''
+    # LoveIt 新增 | 0.2.0 是否显示 Hugo 和主题信息
+    hugo = true
+    # LoveIt 新增 | 0.2.0 是否显示版权信息
+    copyright = true
+    # LoveIt 新增 | 0.2.0 是否显示作者
+    author = true
+    # 网站创立年份
+    since = 2019
+    license = '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'

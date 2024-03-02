@@ -12,7 +12,11 @@ comments: true
 ## copy and deepcopy
 在python3 中 复制分为三种,即 "赋值" "浅拷贝" "深拷贝".python 官方文档解释如下
 ```text
-Assignment statements in Python do not copy objects, they create bindings between a target and an object. For collections that are mutable or contain mutable items, a copy is sometimes needed so one can change one copy without changing the other. This module provides generic shallow and deep copy operations (explained below).
+Assignment statements in Python do not copy objects, they create bindings between a target and an object.
+
+For collections that are mutable or contain mutable items, a copy is sometimes needed so one can change one copy without changing the other.
+
+This module provides generic shallow and deep copy operations (explained below).
 ```
 
 ---
