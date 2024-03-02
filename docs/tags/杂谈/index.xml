@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>杂谈 - 标签 - sunflower</title>
+        <title>杂谈 - 标签 - Askr&#39;s blog</title>
         <link>https://blog.askr.cc/tags/%E6%9D%82%E8%B0%88/</link>
-        <description>杂谈 - 标签 - sunflower</description>
+        <description>杂谈 - 标签 - Askr&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mail@askr.cc (askr)</managingEditor>
             <webMaster>mail@askr.cc (askr)</webMaster><lastBuildDate>Mon, 12 Nov 2018 20:20:03 &#43;0000</lastBuildDate><atom:link href="https://blog.askr.cc/tags/%E6%9D%82%E8%B0%88/" rel="self" type="application/rss+xml" /><item>
     <title>cpu 命名规则 intel篇</title>

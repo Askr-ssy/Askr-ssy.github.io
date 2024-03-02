@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>sunflower</title>
+        <title>Askr&#39;s blog</title>
         <link>https://blog.askr.cc/</link>
-        <description>思想总比时间更久远。</description>
+        <description>Askr&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mail@askr.cc (askr)</managingEditor>
             <webMaster>mail@askr.cc (askr)</webMaster><lastBuildDate>Wed, 20 May 2020 11:19:40 &#43;0000</lastBuildDate>
             <atom:link href="https://blog.askr.cc/index.xml" rel="self" type="application/rss+xml" />

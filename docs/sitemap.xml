@@ -2,12 +2,12 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>https://blog.askr.cc/</loc><lastmod>2020-05-20T11:19:40&#43;00:00</lastmod></url><url>
             <loc>https://blog.askr.cc/tags/ipc/</loc><lastmod>2020-05-20T11:19:40&#43;00:00</lastmod></url><url>
             <loc>https://blog.askr.cc/posts/inter-process-communication-1/</loc><lastmod>2020-05-20T11:19:40&#43;00:00</lastmod></url><url>
             <loc>https://blog.askr.cc/tags/pipe/</loc><lastmod>2020-05-20T11:19:40&#43;00:00</lastmod></url><url>
             <loc>https://blog.askr.cc/posts/</loc><lastmod>2020-05-20T11:19:40&#43;00:00</lastmod></url><url>
             <loc>https://blog.askr.cc/tags/socket/</loc><lastmod>2020-05-20T11:19:40&#43;00:00</lastmod></url><url>
-            <loc>https://blog.askr.cc/</loc><lastmod>2020-05-20T11:19:40&#43;00:00</lastmod></url><url>
             <loc>https://blog.askr.cc/tags/</loc><lastmod>2020-05-20T11:19:40&#43;00:00</lastmod></url><url>
             <loc>https://blog.askr.cc/posts/unicode-and-utf-8/</loc><lastmod>2020-04-17T01:37:35&#43;00:00</lastmod></url><url>
             <loc>https://blog.askr.cc/posts/docker-images-part1-reducing-image-size/</loc><lastmod>2020-04-03T17:38:13&#43;00:00</lastmod></url><url>
@@ -33,6 +33,7 @@
             <loc>https://blog.askr.cc/tags/%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/</loc><lastmod>2018-11-12T20:20:03&#43;00:00</lastmod></url><url>
             <loc>https://blog.askr.cc/tags/%E6%9D%82%E8%B0%88/</loc><lastmod>2018-11-12T20:20:03&#43;00:00</lastmod></url><url>
             <loc>https://blog.askr.cc/tags/cpp/</loc></url><url>
+            <loc>https://blog.askr.cc/false/</loc></url><url>
             <loc>https://blog.askr.cc/tags/lvalue/</loc></url><url>
             <loc>https://blog.askr.cc/posts/lvalur-and-rvalue/</loc></url><url>
             <loc>https://blog.askr.cc/tags/rsa/</loc></url><url>

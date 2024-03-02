@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>翻译 - 标签 - sunflower</title>
+        <title>翻译 - 标签 - Askr&#39;s blog</title>
         <link>https://blog.askr.cc/tags/%E7%BF%BB%E8%AF%91/</link>
-        <description>翻译 - 标签 - sunflower</description>
+        <description>翻译 - 标签 - Askr&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mail@askr.cc (askr)</managingEditor>
             <webMaster>mail@askr.cc (askr)</webMaster><lastBuildDate>Fri, 03 Apr 2020 17:38:13 &#43;0000</lastBuildDate><atom:link href="https://blog.askr.cc/tags/%E7%BF%BB%E8%AF%91/" rel="self" type="application/rss+xml" /><item>
     <title>[翻译]Docker镜像:第一部分-减少镜像大小</title>

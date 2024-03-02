@@ -5,7 +5,7 @@ tags: [python3, copy]
 description: python3 三种复制的区别
 comments: true
 categories: ["python3"]
-series: ["python3解析"]
+
 ---
 ## copy and deepcopy
 在python3 中 复制分为三种,即 "赋值" "浅拷贝" "深拷贝".python 官方文档解释如下
