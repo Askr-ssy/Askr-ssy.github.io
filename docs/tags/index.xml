@@ -1,13 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Tags - Tag - sunflower</title>
+        <title>Tags - 标签 - sunflower</title>
         <link>https://blog.askr.cc/tags/</link>
-        <description>Tags - Tag - sunflower</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 20 May 2020 11:19:40 &#43;0000</lastBuildDate><atom:link href="https://blog.askr.cc/tags/" rel="self" type="application/rss+xml" /><item>
+        <description>Tags - 标签 - sunflower</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mail@askr.cc (askr)</managingEditor>
+            <webMaster>mail@askr.cc (askr)</webMaster><lastBuildDate>Wed, 20 May 2020 11:19:40 &#43;0000</lastBuildDate><atom:link href="https://blog.askr.cc/tags/" rel="self" type="application/rss+xml" /><item>
     <title>IPC</title>
     <link>https://blog.askr.cc/tags/ipc/</link>
     <pubDate>Wed, 20 May 2020 11:19:40 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/tags/ipc/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -15,7 +16,7 @@
     <title>pipe</title>
     <link>https://blog.askr.cc/tags/pipe/</link>
     <pubDate>Wed, 20 May 2020 11:19:40 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/tags/pipe/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -23,7 +24,7 @@
     <title>socket</title>
     <link>https://blog.askr.cc/tags/socket/</link>
     <pubDate>Wed, 20 May 2020 11:19:40 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/tags/socket/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -31,7 +32,7 @@
     <title>docker</title>
     <link>https://blog.askr.cc/tags/docker/</link>
     <pubDate>Fri, 03 Apr 2020 17:38:13 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/tags/docker/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -39,7 +40,7 @@
     <title>翻译</title>
     <link>https://blog.askr.cc/tags/%E7%BF%BB%E8%AF%91/</link>
     <pubDate>Fri, 03 Apr 2020 17:38:13 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/tags/%E7%BF%BB%E8%AF%91/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -47,7 +48,7 @@
     <title>cpython</title>
     <link>https://blog.askr.cc/tags/cpython/</link>
     <pubDate>Mon, 30 Mar 2020 23:20:00 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/tags/cpython/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -55,7 +56,7 @@
     <title>intern</title>
     <link>https://blog.askr.cc/tags/intern/</link>
     <pubDate>Mon, 30 Mar 2020 23:20:00 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/tags/intern/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -63,7 +64,7 @@
     <title>python3</title>
     <link>https://blog.askr.cc/tags/python3/</link>
     <pubDate>Mon, 30 Mar 2020 23:20:00 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/tags/python3/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -71,7 +72,7 @@
     <title>小数据池</title>
     <link>https://blog.askr.cc/tags/%E5%B0%8F%E6%95%B0%E6%8D%AE%E6%B1%A0/</link>
     <pubDate>Mon, 30 Mar 2020 23:20:00 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/tags/%E5%B0%8F%E6%95%B0%E6%8D%AE%E6%B1%A0/</guid>
     <description><![CDATA[]]></description>
 </item>
@@ -79,7 +80,7 @@
     <title>驻留机制</title>
     <link>https://blog.askr.cc/tags/%E9%A9%BB%E7%95%99%E6%9C%BA%E5%88%B6/</link>
     <pubDate>Mon, 30 Mar 2020 23:20:00 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/tags/%E9%A9%BB%E7%95%99%E6%9C%BA%E5%88%B6/</guid>
     <description><![CDATA[]]></description>
 </item>

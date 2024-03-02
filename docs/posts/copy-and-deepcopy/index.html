@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-CN">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,16 +23,16 @@
         "@context": "http://schema.org",
         "@type": "BlogPosting",
         "headline": "copy_and_deepcopy",
-        "inLanguage": "zh-cn",
+        "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/blog.askr.cc\/posts\/copy-and-deepcopy\/"
-        },"genre": "posts","keywords": "python, python3, copy, deepcopy","wordcount":  206 ,
+        },"genre": "posts","keywords": "python, python3, copy, deepcopy","wordcount":  628 ,
         "url": "https:\/\/blog.askr.cc\/posts\/copy-and-deepcopy\/","datePublished": "2018-12-22T13:43:36+00:00","dateModified": "2018-12-22T13:43:36+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
-                "name": "Author"
+                "name": "askr"
             },"description": "python3 三种复制的区别"
     }
     </script></head>
@@ -44,7 +44,7 @@
             <a href="/" title="sunflower">My cool site</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a></div>
         </div>
@@ -59,21 +59,21 @@
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
 </header><main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">Contents</h2>
+            <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">copy_and_deepcopy</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-12-22">2018-12-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;206 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>askr</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2018-12-22">2018-12-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 628 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
-                    <span>Contents</span>
+                    <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
@@ -89,59 +89,59 @@
 </nav></div>
             </div><div class="content" id="content"><h2 id="copy-and-deepcopy">copy and deepcopy</h2>
 <p>在python3 中 复制分为三种,即 &ldquo;赋值&rdquo; &ldquo;浅拷贝&rdquo; &ldquo;深拷贝&rdquo;.python 官方文档解释如下</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Assignment statements in Python do not copy objects, they create bindings between a target and an object. For collections that are mutable or contain mutable items, a copy is sometimes needed so one can change one copy without changing the other. This module provides generic shallow and deep copy operations (explained below).
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Assignment statements in Python do not copy objects, they create bindings between a target and an object. For collections that are mutable or contain mutable items, a copy is sometimes needed so one can change one copy without changing the other. This module provides generic shallow and deep copy operations (explained below).
 </span></span></code></pre></div><hr>
 <h3 id="赋值">赋值</h3>
 <p>赋值即利用 &ldquo;=&rdquo; 号运算符进行赋值, 但是这种赋值其本质是 “引用”, 即 重新创建一个变量名,然后绑定到 &ldquo;=&rdquo; 号右值的地址,这种情况下,<strong>任何对新创建的变量进行的修改都会同步到旧的变量上!</strong></p>
 <p>案例如下:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> old <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> new <span style="color:#f92672">=</span> old
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> id(old)
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">140721449431328</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> id(new)
-</span></span><span style="display:flex;"><span><span style="color:#ae81ff">140721449431328</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> old <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> new <span style="color:#f92672">=</span> old
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> old[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> new
-</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> old <span style="color:#f92672">is</span> new
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">True</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> id(old)<span style="color:#f92672">==</span>id(new)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">True</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python3" data-lang="python3"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">old</span> <span class="o">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">new</span> <span class="o">=</span> <span class="n">old</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">140721449431328</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">140721449431328</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">old</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">new</span> <span class="o">=</span> <span class="n">old</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">old</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">new</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">old</span> <span class="ow">is</span> <span class="n">new</span>
+</span></span><span class="line"><span class="cl"><span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">old</span><span class="p">)</span><span class="o">==</span><span class="nb">id</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kc">True</span>
 </span></span></code></pre></div><p>PS:总结来说,则是<strong>创建了一个新的变量名.然后指向旧变量的地址</strong></p>
 <hr>
 <h3 id="浅拷贝">浅拷贝</h3>
 <p>第二种即是我们常说的 <strong>浅拷贝</strong> 这种拷贝是在于自定义的数据类型 被 &ldquo;=&rdquo; 运算符使用时所发生的.这种情况下 任何简易的修改(指 第一层引用的修改) 并不会改动另一个变量,但是在修改深处的值时,则依旧会影响到</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">import</span> copy
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> old <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,[<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> new <span style="color:#f92672">=</span> copy<span style="color:#f92672">.</span>copy(old)
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> old[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> old
-</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#ae81ff">2</span>, [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>]]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> new
-</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>]]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> old[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;3&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> old
-</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#ae81ff">2</span>, [<span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#ae81ff">4</span>]]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> new
-</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, [<span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#ae81ff">4</span>]]
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python3" data-lang="python3"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">copy</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">old</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">new</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">old</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">old</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">new</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">old</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">old</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">new</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
 </span></span></code></pre></div><p>PS:总结来说,<strong>浅拷贝在复制的时候,对于变量的第一层地址.创建了新的空间.但是对于第二层以下的地址.则是直接偷懒.把地址复制了赋予左边,并没有开创同等的空间</strong></p>
 <hr>
 <h3 id="深拷贝">深拷贝</h3>
 <p>第三种 深拷贝 才是真正意义上的完全拷贝.即重新创建与右值同样大小的空间.然后循环复制.这种情况下.新创建的变量无论如何修改都不会影响到旧的变量</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">import</span> copy
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> old <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,[<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>]]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> new <span style="color:#f92672">=</span> copy<span style="color:#f92672">.</span>deepcopy(old)
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> new
-</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>]]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> new[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> new[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;3&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> new
-</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#ae81ff">2</span>, [<span style="color:#e6db74">&#39;3&#39;</span>, <span style="color:#ae81ff">4</span>]]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> old
-</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>]]
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python3" data-lang="python3"><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">copy</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">old</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">new</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">old</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">new</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">new</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">new</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="s2">&#34;3&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">new</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="n">old</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
 </span></span></code></pre></div><h4 id="引用">引用</h4>
 <p><a href="https://docs.python.org/3/library/copy.html" target="_blank" rel="noopener noreffer ">https://docs.python.org/3/library/copy.html</a></p>
 <h5 id="todo">TODO</h5>
@@ -150,12 +150,12 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2018-12-22</span>
+                <span>更新于 2018-12-22</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://blog.askr.cc/posts/copy-and-deepcopy/" data-title="copy_and_deepcopy" data-hashtags="python,python3,copy,deepcopy"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://blog.askr.cc/posts/copy-and-deepcopy/" data-hashtag="python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://blog.askr.cc/posts/copy-and-deepcopy/" data-title="copy_and_deepcopy"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://blog.askr.cc/posts/copy-and-deepcopy/" data-title="copy_and_deepcopy"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://blog.askr.cc/posts/copy-and-deepcopy/" data-title="copy_and_deepcopy"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.askr.cc/posts/copy-and-deepcopy/" data-title="copy_and_deepcopy" data-hashtags="python,python3,copy,deepcopy"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.askr.cc/posts/copy-and-deepcopy/" data-hashtag="python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://blog.askr.cc/posts/copy-and-deepcopy/" data-title="copy_and_deepcopy"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.askr.cc/posts/copy-and-deepcopy/" data-title="copy_and_deepcopy"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.askr.cc/posts/copy-and-deepcopy/" data-title="copy_and_deepcopy"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -163,7 +163,7 @@
     <div class="post-info-more">
         <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">python</a>,&nbsp;<a href="/tags/python3/">python3</a>,&nbsp;<a href="/tags/copy/">copy</a>,&nbsp;<a href="/tags/deepcopy/">deepcopy</a></section>
         <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
@@ -174,15 +174,15 @@
                 Please enable JavaScript to view the comments powered by <a href="https://giscus.app">Giscus</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.122.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.122.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">askr</a></span></div>
         </div>
     </footer></div>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
                 <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"giscus":{"category":"Announcements","categoryId":"DIC_kwDODQ9_kc4CdTvY","darkTheme":"dark","emitMetadata":"1","inputPosition":"top","lang":"zh-CN","lazyLoading":true,"lightTheme":"preferred_color_scheme","mapping":"pathname","reactionsEnabled":"1","repo":"Askr-ssy/Askr-ssy.github.io","repoId":"MDEwOlJlcG9zaXRvcnkyMTkxMTk1MDU="}}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"giscus":{"category":"Announcements","categoryId":"DIC_kwDODQ9_kc4CdTvY","darkTheme":"dark","emitMetadata":"1","inputPosition":"top","lang":"zh-CN","lazyLoading":true,"lightTheme":"preferred_color_scheme","mapping":"pathname","reactionsEnabled":"1","repo":"Askr-ssy/Askr-ssy.github.io","repoId":"MDEwOlJlcG9zaXRvcnkyMTkxMTk1MDU="}}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

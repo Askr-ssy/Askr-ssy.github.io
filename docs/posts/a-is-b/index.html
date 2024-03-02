@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-CN">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,16 +23,16 @@
         "@context": "http://schema.org",
         "@type": "BlogPosting",
         "headline": "a is b ?",
-        "inLanguage": "zh-cn",
+        "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/blog.askr.cc\/posts\/a-is-b\/"
-        },"genre": "posts","keywords": "python3, 小数据池, cpython, 驻留机制, intern","wordcount":  153 ,
+        },"genre": "posts","keywords": "python3, 小数据池, cpython, 驻留机制, intern","wordcount":  711 ,
         "url": "https:\/\/blog.askr.cc\/posts\/a-is-b\/","datePublished": "2020-03-30T23:20:00+00:00","dateModified": "2020-03-30T23:20:00+00:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
-                "name": "Author"
+                "name": "askr"
             },"description": "Cpython 的驻留模式"
     }
     </script></head>
@@ -44,7 +44,7 @@
             <a href="/" title="sunflower">My cool site</a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
                     <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
                 </a></div>
         </div>
@@ -59,21 +59,21 @@
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
 </header><main class="main">
                 <div class="container"><div class="toc" id="toc-auto">
-            <h2 class="toc-title">Contents</h2>
+            <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">a is b ?</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-03-30">2020-03-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;153 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>askr</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2020-03-30">2020-03-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 711 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
-                    <span>Contents</span>
+                    <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
@@ -87,19 +87,19 @@
 </nav></div>
             </div><div class="content" id="content"><p>今天在社区 遇到一个蛮有意思的问题,分享出来给大家</p>
 <h2 id="问题">问题</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#f92672">//</span>猜测一下运行结果是否为True
-</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;some_string&#34;</span>
-</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;some&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;_&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;string&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello&#34;</span>
-</span></span><span style="display:flex;"><span>d <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>e <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello!&#34;</span>
-</span></span><span style="display:flex;"><span>f <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello!&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>g,h <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello!&#34;</span>,<span style="color:#e6db74">&#34;hello!&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(a <span style="color:#f92672">is</span> b, c <span style="color:#f92672">is</span> d, e <span style="color:#f92672">is</span> f,g <span style="color:#f92672">is</span> h)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python3" data-lang="python3"><span class="line"><span class="cl"><span class="o">//</span><span class="n">猜测一下运行结果是否为True</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="s2">&#34;some_string&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="s2">&#34;some&#34;</span> <span class="o">+</span> <span class="s2">&#34;_&#34;</span> <span class="o">+</span> <span class="s2">&#34;string&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="s2">&#34;hello&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">d</span> <span class="o">=</span> <span class="s2">&#34;hello&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">e</span> <span class="o">=</span> <span class="s2">&#34;hello!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span> <span class="o">=</span> <span class="s2">&#34;hello!&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">g</span><span class="p">,</span><span class="n">h</span> <span class="o">=</span> <span class="s2">&#34;hello!&#34;</span><span class="p">,</span><span class="s2">&#34;hello!&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="ow">is</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span> <span class="ow">is</span> <span class="n">f</span><span class="p">,</span><span class="n">g</span> <span class="ow">is</span> <span class="n">h</span><span class="p">)</span>
 </span></span></code></pre></div><h2 id="第一次解答">第一次解答</h2>
 <p>刚开始,在没有实际运行的情况下,因为考虑到小数据池的原因,猜测答案为 false true true true</p>
 <p>具体解释为</p>
@@ -114,32 +114,32 @@
 <h2 id="解惑">解惑</h2>
 <p>发现实际答案后，完全能够理解第一个的结果为true,解释器可能会在表达式求值后，进行对左值的赋值或引用，然而3,4结果确十分迷惑,初步猜想是达到小数据池的阈值,可是g,h 的结果所违反,在和其他人讨论后,指向了Cpython的内部实现机制-驻留机制</p>
 <p>通常意义上来说,我们所说的Pyhton,也即Cpython的小数据池,就是由 <strong>驻留机制(intern)</strong> 所实现的,驻留机制对于字符串的隐式驻留,有一道筛选 即 <strong>只有包含ASCII字母，数字或下划线的字符串才会被隐式驻留</strong> 所以,e与f 才会被判定为不相似.在g,h中，也许是Cpython的进一步优化,在同一语句中,只创建了一个对象,然后两个引用. <strong>当然,这并不能说明其发生了隐式驻留.</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;wtf!&#34;</span>, <span style="color:#e6db74">&#34;wtf!&#34;</span>
-</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;wtf!&#34;</span>
-</span></span><span style="display:flex;"><span>a <span style="color:#f92672">is</span> b
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">True</span>
-</span></span><span style="display:flex;"><span>a <span style="color:#f92672">is</span> c
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">False</span>
-</span></span><span style="display:flex;"><span>b <span style="color:#f92672">is</span> c
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">False</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python3" data-lang="python3"><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="s2">&#34;wtf!&#34;</span><span class="p">,</span> <span class="s2">&#34;wtf!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="s2">&#34;wtf!&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="ow">is</span> <span class="n">c</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="ow">is</span> <span class="n">c</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="kc">False</span>
 </span></span></code></pre></div><p>这里可以看到 c 与 a 或 b 并不相同,并且在进一步尝试下发现,空字符串和单个字符串(包含非法字符)也会被驻留</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
-</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
-</span></span><span style="display:flex;"><span>a <span style="color:#f92672">is</span> b
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">True</span>
-</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;_&#39;</span>
-</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;_&#39;</span>
-</span></span><span style="display:flex;"><span>a <span style="color:#f92672">is</span> b
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">True</span>
-</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&amp;&#39;</span>
-</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&amp;&#39;</span>
-</span></span><span style="display:flex;"><span>a <span style="color:#f92672">is</span> b
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">True</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python3" data-lang="python3"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="s1">&#39;_&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="s1">&#39;&amp;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="s1">&#39;&amp;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="kc">True</span>
 </span></span></code></pre></div><p>当然,既然有隐式驻留,那么就有显示驻留,翻了一下相关文档后, 使用sys.intern 即可</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span>a <span style="color:#f92672">=</span> intern(<span style="color:#e6db74">&#34;wtf!&#34;</span>)
-</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> intern(<span style="color:#e6db74">&#34;wtf!&#34;</span>)
-</span></span><span style="display:flex;"><span>a <span style="color:#f92672">is</span> b
-</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">True</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python3" data-lang="python3"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="n">intern</span><span class="p">(</span><span class="s2">&#34;wtf!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="n">intern</span><span class="p">(</span><span class="s2">&#34;wtf!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="ow">is</span> <span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="kc">True</span>
 </span></span></code></pre></div><h2 id="todo">TODO</h2>
 <ul>
 <li><i class="far fa-square fa-fw" aria-hidden="true"></i> 优化文案</li>
@@ -149,12 +149,12 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2020-03-30</span>
+                <span>更新于 2020-03-30</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://blog.askr.cc/posts/a-is-b/" data-title="a is b ?" data-hashtags="python3,小数据池,cpython,驻留机制,intern"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://blog.askr.cc/posts/a-is-b/" data-hashtag="python3"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://blog.askr.cc/posts/a-is-b/" data-title="a is b ?"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://blog.askr.cc/posts/a-is-b/" data-title="a is b ?"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://blog.askr.cc/posts/a-is-b/" data-title="a is b ?"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://blog.askr.cc/posts/a-is-b/" data-title="a is b ?" data-hashtags="python3,小数据池,cpython,驻留机制,intern"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://blog.askr.cc/posts/a-is-b/" data-hashtag="python3"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://blog.askr.cc/posts/a-is-b/" data-title="a is b ?"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://blog.askr.cc/posts/a-is-b/" data-title="a is b ?"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://blog.askr.cc/posts/a-is-b/" data-title="a is b ?"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
@@ -162,7 +162,7 @@
     <div class="post-info-more">
         <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python3/">python3</a>,&nbsp;<a href="/tags/%E5%B0%8F%E6%95%B0%E6%8D%AE%E6%B1%A0/">小数据池</a>,&nbsp;<a href="/tags/cpython/">cpython</a>,&nbsp;<a href="/tags/%E9%A9%BB%E7%95%99%E6%9C%BA%E5%88%B6/">驻留机制</a>,&nbsp;<a href="/tags/intern/">intern</a></section>
         <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
@@ -173,15 +173,15 @@
                 Please enable JavaScript to view the comments powered by <a href="https://giscus.app">Giscus</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.122.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.122.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">askr</a></span></div>
         </div>
     </footer></div>
 
-        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
                 <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
-            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
                 <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
             </a>
-        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"giscus":{"category":"Announcements","categoryId":"DIC_kwDODQ9_kc4CdTvY","darkTheme":"dark","emitMetadata":"1","inputPosition":"top","lang":"zh-CN","lazyLoading":true,"lightTheme":"preferred_color_scheme","mapping":"pathname","reactionsEnabled":"1","repo":"Askr-ssy/Askr-ssy.github.io","repoId":"MDEwOlJlcG9zaXRvcnkyMTkxMTk1MDU="}}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"giscus":{"category":"Announcements","categoryId":"DIC_kwDODQ9_kc4CdTvY","darkTheme":"dark","emitMetadata":"1","inputPosition":"top","lang":"zh-CN","lazyLoading":true,"lightTheme":"preferred_color_scheme","mapping":"pathname","reactionsEnabled":"1","repo":"Askr-ssy/Askr-ssy.github.io","repoId":"MDEwOlJlcG9zaXRvcnkyMTkxMTk1MDU="}}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

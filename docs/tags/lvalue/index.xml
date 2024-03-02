@@ -1,17 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>lvalue - Tag - sunflower</title>
+        <title>lvalue - 标签 - sunflower</title>
         <link>https://blog.askr.cc/tags/lvalue/</link>
-        <description>lvalue - Tag - sunflower</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><atom:link href="https://blog.askr.cc/tags/lvalue/" rel="self" type="application/rss+xml" /><item>
+        <description>lvalue - 标签 - sunflower</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mail@askr.cc (askr)</managingEditor>
+            <webMaster>mail@askr.cc (askr)</webMaster><atom:link href="https://blog.askr.cc/tags/lvalue/" rel="self" type="application/rss+xml" /><item>
     <title>lvalur_and_rvalue</title>
     <link>https://blog.askr.cc/posts/lvalur-and-rvalue/</link>
     <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/posts/lvalur-and-rvalue/</guid>
-    <description><![CDATA[cpp 的 value_category 在cpp 当中 每个表达式(带有操作数的操作符，字面值，变量名等)都有一个类型与值类型 。
-值类型是在表达式求值期间创建，复制和移动临时对象时编译器必须遵循的规则的基础，并且只属于三种类型的其中之一：prvalue xvalue lvalue。
-TODO 等待补充 ]]></description>
+    <description><![CDATA[cpp 的 value_category 在cpp 当中 每个表达式(带有操作数的操作符，字面值，变量名等)都有一个类型与值类型 。 值类型是在表达式求值期间创建，复制和移动临时对象时]]></description>
 </item>
 </channel>
 </rss>

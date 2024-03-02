@@ -1,24 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>小数据池 - Tag - sunflower</title>
+        <title>小数据池 - 标签 - sunflower</title>
         <link>https://blog.askr.cc/tags/%E5%B0%8F%E6%95%B0%E6%8D%AE%E6%B1%A0/</link>
-        <description>小数据池 - Tag - sunflower</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 30 Mar 2020 23:20:00 &#43;0000</lastBuildDate><atom:link href="https://blog.askr.cc/tags/%E5%B0%8F%E6%95%B0%E6%8D%AE%E6%B1%A0/" rel="self" type="application/rss+xml" /><item>
+        <description>小数据池 - 标签 - sunflower</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mail@askr.cc (askr)</managingEditor>
+            <webMaster>mail@askr.cc (askr)</webMaster><lastBuildDate>Mon, 30 Mar 2020 23:20:00 &#43;0000</lastBuildDate><atom:link href="https://blog.askr.cc/tags/%E5%B0%8F%E6%95%B0%E6%8D%AE%E6%B1%A0/" rel="self" type="application/rss+xml" /><item>
     <title>a is b ?</title>
     <link>https://blog.askr.cc/posts/a-is-b/</link>
     <pubDate>Mon, 30 Mar 2020 23:20:00 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/posts/a-is-b/</guid>
-    <description><![CDATA[今天在社区 遇到一个蛮有意思的问题,分享出来给大家
-问题 //猜测一下运行结果是否为True a = &#34;some_string&#34; b = &#34;some&#34; + &#34;_&#34; + &#34;string&#34; c = &#34;hello&#34; d = &#34;hello&#34; e = &#34;hello!&#34; f = &#34;hello!&#34; g,h = &#34;hello!&#34;,&#34;hello!&#34; print(a is b, c is d, e is f,g is h) 第一次解答 刚开始,在没有实际运行的情况下,因为考虑到小数据池的原因,猜测答案为 false true true true
-具体解释为
-1.无法确定 解释器否会把表达式求值后在进行引用小数据池中的内容，所以未false
-2.很简单的小数据池 引用 所以为 true
-3.同上
-4.同上
-实际答案 然而,在Cpython 3.6.9 实际运行后,答案为 True True False True
-解惑 发现实际答案后，完全能够理解第一个的结果为true,解释器可能会在表达式求值后，进行对左值的赋值或引用，然而3,4结果确十分迷惑,初步猜想是达到小数据池的阈值,可是g,h 的结果所违反,在和其他人讨论后,指向了Cpython的内部实现机制-驻留机制
-通常意义上来说,我们所说的Pyhton,也即Cpython的小数据池,就是由 驻留机制(intern) 所实现的,驻留机制对于字符串的隐式驻留,有一道筛选 即 只有包含ASCII字母，数字或下划线的字符串才会被隐式驻留 所以,e与f 才会被判定为不相似.]]></description>
+    <description><![CDATA[今天在社区 遇到一个蛮有意思的问题,分享出来给大家 问题 //猜测一下运行结果是否为True a = &#34;some_string&#34; b = &#34;some&#34; + &#34;_&#34; + &#34;string&#34; c = &#34;hello&#34; d = &#34;hello&#34; e = &#34;hello!&#34; f = &#34;hello!&#34; g,h = &#34;hello!&#34;,&#34;hello!&#34; print(a is]]></description>
 </item>
 </channel>
 </rss>

@@ -1,16 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>python - Tag - sunflower</title>
+        <title>python - 标签 - sunflower</title>
         <link>https://blog.askr.cc/tags/python/</link>
-        <description>python - Tag - sunflower</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 22 Dec 2018 13:43:36 &#43;0000</lastBuildDate><atom:link href="https://blog.askr.cc/tags/python/" rel="self" type="application/rss+xml" /><item>
+        <description>python - 标签 - sunflower</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mail@askr.cc (askr)</managingEditor>
+            <webMaster>mail@askr.cc (askr)</webMaster><lastBuildDate>Sat, 22 Dec 2018 13:43:36 &#43;0000</lastBuildDate><atom:link href="https://blog.askr.cc/tags/python/" rel="self" type="application/rss+xml" /><item>
     <title>copy_and_deepcopy</title>
     <link>https://blog.askr.cc/posts/copy-and-deepcopy/</link>
     <pubDate>Sat, 22 Dec 2018 13:43:36 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/posts/copy-and-deepcopy/</guid>
-    <description><![CDATA[copy and deepcopy 在python3 中 复制分为三种,即 &ldquo;赋值&rdquo; &ldquo;浅拷贝&rdquo; &ldquo;深拷贝&rdquo;.python 官方文档解释如下
-Assignment statements in Python do not copy objects, they create bindings between a target and an object. For collections that are mutable or contain mutable items, a copy is sometimes needed so one can change one copy without changing the other. This module provides generic shallow and deep copy operations (explained below). 赋值 赋值即利用 &ldquo;=&rdquo; 号运算符进行赋值, 但是这种赋值其本质是 “引用”, 即 重新创建一个变量名,然后绑定到 &ldquo;=&rdquo; 号右值的地址,这种情况下,任何对新创建的变量进行的修改都会同步到旧的变量上!]]></description>
+    <description><![CDATA[copy and deepcopy 在python3 中 复制分为三种,即 &ldquo;赋值&rdquo; &ldquo;浅拷贝&rdquo; &ldquo;深拷贝&rdquo;]]></description>
 </item>
 </channel>
 </rss>

@@ -1,22 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>rsa - Tag - sunflower</title>
+        <title>rsa - 标签 - sunflower</title>
         <link>https://blog.askr.cc/tags/rsa/</link>
-        <description>rsa - Tag - sunflower</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><atom:link href="https://blog.askr.cc/tags/rsa/" rel="self" type="application/rss+xml" /><item>
+        <description>rsa - 标签 - sunflower</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>mail@askr.cc (askr)</managingEditor>
+            <webMaster>mail@askr.cc (askr)</webMaster><atom:link href="https://blog.askr.cc/tags/rsa/" rel="self" type="application/rss+xml" /><item>
     <title>secure_shell 简述之非对称加密</title>
     <link>https://blog.askr.cc/posts/secure-shell-1/</link>
     <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
-    <author>Author</author>
+    <author>askr</author>
     <guid>https://blog.askr.cc/posts/secure-shell-1/</guid>
-    <description><![CDATA[SSH简述 SSH 全称为Secure Shell , 是一种加密的 网络传输协议 ,即理论上任何网络服务都可以用SSH来安全传输，不过主要用于远程登陆系统。SSH的出现主要用于取代以往不安全的Telnet 和非安全shell的替代品，Telnet 与 Berkeley Login，rsh，rexec等协议采用明文传输，容易遭受到攻击，所以应此产生了SSH这种能在非安全网络环境下(容易受到攻击，如互联网)信息的加密完整可靠。
-SSH原理 谈到SSH就不得不提到SSH的通信原理 公开密钥加密(Public-Key Cryptography) 国内也有叫法叫做 非对称加密 ，我个人比较喜欢后者,不过在这里为了更好的说明原理就是用学术名称.
-公开密钥加密 由两部分组成，一部分是如其名称是一个公共密钥，公钥可以被别人所知，另一个是私有密钥，私钥只能自己知道. 公共密钥加密看似比普通的单密钥加密多了一个公钥,但是这确是 公开密钥加密算法的精髓,保证其能在非安全网络环境下进行安全传输的关键.
-公开密钥加密的原理 简单来说，公开密钥加密的核心是采用基于数学问题的密码算法，产生一个公钥和一个密钥，公钥和密钥加密的消息只能由对应的密钥和公钥解密，其自身也无法解密，这种情况下，可以把公钥放出去，因为只有私钥可以解密，任何对密文的修改都会导致私钥无法解密，所以可以在非安全的网络环境下传输。
-公开密钥加密的数学原理 (RSA算法) 这里以RSA算法为版本进行讲解。假设A和B想过通过一个不安全的网络信道进行通信，那么A可以通过以下方式来产生一个公钥和一个密钥
-1.随意选择两个大的素数 p和q,p!=q,计算 N=pq2.根据欧拉函数，r = φ (N) = φ(p)φ(q) = φ(p-1)φ(q-1)3.选择一个小于r,并且与r互质的整数e,并求e关于r的模逆元，命名为d (求d令ed = 1 (mod r))4.将 p 和 q 销毁5.(N,e)为公钥,(N,d)为私钥 如此，B在得知A的公钥(N,e)后，如果想要给A发送一个消息，可以通过提前约定的格式把明文m转化为一个小于N的非负整数n，通过公式 $c \equiv n^e \pmod{N}$ 来将密文m转化为c，并且将其传输给a
-并且，a在得到密文c后通过 $n \equiv c^d \pmod{N}$ 来解出n,并且通过约定的格式还原出m.
-解码的原理是 $c^d \equiv n^{e \cdot d} \pmod{N}$]]></description>
+    <description><![CDATA[SSH简述 SSH 全称为Secure Shell , 是一种加密的 网络传输协议 ,即理论上任何网络服务都可以用SSH来安全传输，不过主要用于远程登陆系统。SSH的]]></description>
 </item>
 </channel>
 </rss>
